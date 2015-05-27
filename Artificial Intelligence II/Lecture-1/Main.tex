@@ -1,0 +1,43 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{dsfont}
+\usepackage{multirow}
+
+\definecolor{darkgreen}{RGB}{0,150,0}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Artificial Intelligence II - Practice Lecture I]{\Large Artificial Intelligence II\\ \small \vspace{0.05cm} Prof. Subramanian Ramamoorthy, Daniele Nardi \\ \footnotesize \vspace{0.05cm} A.Y. 2014/2015 \\ \huge Q-Learning\\ \vspace{-0.1cm} Contract Net Protocol}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[May 11, 2015]{Practice Lecture I\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Preliminary}
+\input{Q-Learning}
+\input{CNP}
+
+\end{document}

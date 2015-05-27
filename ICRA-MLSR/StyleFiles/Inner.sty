@@ -1,0 +1,128 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/inner/beamerinnerthemeroundeddis.sty,v 1.5 2007/01/28 20:48:30 tantau Exp $
+
+\usepackage{tikz}
+\usetikzlibrary{backgrounds}
+
+\DeclareOptionBeamer{shadow}[true]{\def\beamer@themeroundeddis@shadow{#1}}
+\ExecuteOptionsBeamer{shadow=false}
+%\DeclareOptionBeamer{institute}[true]{\def\beamer@themeroundeddis@institute{#1}}
+%\ExecuteOptionsBeamer{institute=false}
+\ProcessOptionsBeamer
+
+\mode<presentation>
+
+% Not supported yet
+%\newif\ifbeamer@themeroundeddis@institute
+%\beamer@themeroundeddis@institutetrue
+
+\setbeamertemplate{blocks}[rounded][shadow=\beamer@themeroundeddis@shadow]
+\setbeamertemplate{items}[ball]
+\setbeamertemplate{sections/subsections in toc}[ball]
+\setbeamertemplate{part page}[default][rounded=true,shadow=\beamer@themeroundeddis@shadow]
+
+\defbeamertemplate*{title page}{dis}[1][]
+{
+	%background
+	\vspace{-0.03\paperheight}
+	\mbox{
+	\hspace{-2.1\beamer@leftmargin}
+
+	\begin{tikzpicture}[background rectangle/.style=
+		{inner sep=0,inner xsep=0,inner ysep=0,outer sep=0,outer xsep=0,outer ysep=0},
+		show background rectangle]
+	\coordinate (center) at (0,0);
+	\coordinate (fronttop) at (0,.1\paperheight);
+	\coordinate (frontside) at (-.285\paperwidth,0);
+	\coordinate (top) at (0,.51\paperheight);
+	\coordinate (bottom) at (0,-.51\paperheight);
+	\coordinate (left) at (-.51\paperwidth,0);
+	\coordinate (right) at (.51\paperwidth,0);
+
+	\fill[color=institutecomplementary] (top -| left)
+							-- (top -| right)
+							-- (bottom -| right)
+							-- (bottom -| left)
+						;
+	\fill[color=institute] (bottom -| left)
+							-- (left)
+							-- (frontside)
+							-- (fronttop -| frontside)
+							-- (fronttop -| right)
+							-- (bottom -| right)
+						;
+	\end{tikzpicture}
+	}
+
+	%logo figure
+	\begin{tikzpicture}[remember picture, overlay]
+		\node at (.15\paperwidth,.476\paperheight)
+		{
+		\pgfdeclaremask{logomask}{ThemeFigs/LogoSapienza.Mask}
+		\pgfimage[mask=logomask,interpolate=true]{ThemeFigs/LogoSapienza}
+		};
+		\node at (.38\paperwidth,.534\paperheight)
+		{
+		%\pgfdeclaremask{logodissapienza}{ThemeFigs/LogoDisSapienza.Mask}
+		%\pgfimage[mask=logomask,interpolate=true,width=4cm]{ThemeFigs/LogoDisSapienza}
+		\pgfdeclaremask{logodissapienza}{ThemeFigs/InformaticsUni.Mask}
+		\pgfimage[mask=logomask,interpolate=true,width=4cm]{ThemeFigs/InformaticsUni}
+		};
+	\end{tikzpicture}
+
+	%text
+	\begin{tikzpicture}[remember picture, overlay]
+		% title and subtitle
+		\draw (.17\paperwidth,1.1\paperheight)
+		node[text width=.7\paperwidth,below right]
+		{
+		\begin{beamercolorbox}[sep=8pt,ignorebg]{palette secondary}
+			{\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle\par}%
+			\ifx\insertsubtitle\@empty%
+			\else%
+				\vskip0.25em%
+				{\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\hskip3em\insertsubtitle\par}%
+			\fi%
+		\end{beamercolorbox}
+		};
+		% author
+		\draw (.05\paperwidth,.38\paperheight)
+		node[text width=.9\paperwidth,anchor=west]
+		{
+			\begin{beamercolorbox}[sep=4pt,right]{palette tertiary}
+				\usebeamerfont{author}\insertauthor
+			\end{beamercolorbox}
+		};
+		% institute
+		\draw (.05\paperwidth,.28\paperheight)
+		node[text width=.9\paperwidth,anchor=west]
+		{
+			\begin{beamercolorbox}[sep=4pt,right]{palette tertiary}
+				\usebeamerfont{institute}\insertinstitute
+			\end{beamercolorbox}
+		};
+		% date (conference)
+		\draw (.05\paperwidth,.2\paperheight)
+		node[text width=.9\paperwidth,anchor=west]
+		{
+			\begin{beamercolorbox}[sep=4pt,right]{palette tertiary}
+				\usebeamerfont{date}\insertdate
+			\end{beamercolorbox}
+		};
+	\end{tikzpicture}
+}
+
+
+\mode<all>
+
+%%% Local Variables: 
+%%% TeX-master: "~/texmf/tex/latex/beamer/test/test.tex"
+%%% End:
