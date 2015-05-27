@@ -1,0 +1,55 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{movie15}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Distributed Particle Filtering for Real-Time Multi-Robot Multi-Sensor MOT]{\Large Distributed Particle Filtering for Real-Time Multi-Robot Multi- Sensor Multi-Object Tracking}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[October 29, 2014]{Second Ph.D Year Presentation\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{RelatedWork-Tracking}
+\input{PTracking}
+\input{ActivityForecasting}
+\input{Conclusions}
+\input{Exams}
+
+\tiny
+\nocite{Kasturi09}
+\nocite{Berclaz11}
+\nocite{Kitani12}
+\nocite{Yang09}
+\nocite{Andriyenko11}
+\nocite{Leal11}
+\nocite{Sharma09}
+\nocite{Ng00}
+\bibliographystyle{plain}
+\bibliography{SecondYear}
+
+\end{document}

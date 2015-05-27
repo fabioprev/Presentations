@@ -1,0 +1,44 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Distributed Particle Filtering for Real-Time Multi-Camera Object Tracking]{\Large Distributed Particle Filtering for Real-Time Multi-Camera Object Tracking}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[September 8, 2014]{RAD Group Meeting\\Edinburgh, Scotland}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{RelatedWork-Tracking}
+\input{PTracking}
+\input{ActivityForecasting}
+\input{BeeSAFE}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{RAD}
+
+\end{document}

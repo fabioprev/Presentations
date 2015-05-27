@@ -1,0 +1,40 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Distributed sensor network for multi-robot surveillance]{\Large Distributed sensor network for multi-robot surveillance}
+
+\subtitle{}
+
+\author[Andrea Pennisi]{\Large\textbf{Andrea Pennisi}\\ Fabio Previtali\\ Francesco Ficarola}
+
+\date[June 2-5, 2014]{\small 3rd International Workshop on Cooperative Robots and Sensor Networks\\Hasselt, Belgium}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{PTracking}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{RoboSense}
+
+\end{document}

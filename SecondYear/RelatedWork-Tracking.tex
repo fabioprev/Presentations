@@ -1,0 +1,93 @@
+\section{Related Work}
+
+\begin{frame}
+	\frametitle{Related Work}
+	\framesubtitle{Multi-object tracking}
+	
+	\Large
+	
+	\vspace{0.4cm}
+	
+	Multi-object tracking algorithms can be classified into two groups (Andriyenko \emph{et al.}):
+	
+	\vspace{0.2cm}
+	
+	\begin{itemize}
+		\item \textbf{Global} (or \emph{offline}): formulating the tracking problem as an
+			  optimization one, where all the trajectories within a temporal window are
+			  optimized jointly
+		\item \textbf{Recursive} (or \emph{online}): estimating the current state relying
+			  only on the current observations and on the previous state
+	\end{itemize}
+\end{frame}
+
+%\begin{frame}
+%	\frametitle{Multi-Object Tracking}
+%	\framesubtitle{Global methods}
+%	
+%	\Large
+%	
+%	\vspace{0.2cm}
+%	
+%	\begin{itemize}
+%		\item \textbf{Berclaz} \emph{et al.} \cite{Berclaz11}: mathematically sound
+%			  multiple object tracking framework based on a k-shortest path optimization
+%			  algorithm
+%		\vspace{0.1cm}
+%		\item \textbf{Leal-Taix{\'e}} \emph{et al.} \cite{Leal11}: formulate a new graph
+%			  model for the multiple object tracking challenge by minimizing a network flow
+%			  problem
+%		\vspace{0.1cm}
+%		\item \textbf{Sharma} \emph{et al.} \cite{Sharma09}: adapting a Cluster-Boosted
+%			  Tree based pedestrian detector to deal with the people tracking problem
+%		\vspace{0.1cm}
+%		\item ...
+%	\end{itemize}
+%\end{frame}
+%
+%\begin{frame}
+%	\frametitle{Multi-Object Tracking}
+%	\framesubtitle{Recursive methods}
+%	
+%	\Large
+%	
+%	\vspace{0.2cm}
+%	
+%	\begin{itemize}
+%		\item \textbf{Breitenstein} \emph{et al.} \cite{Breitenstein11}: online method for
+%			  multi-person tracking-by-detection in a particle filtering framework
+%		\vspace{0.1cm}
+%		\item \textbf{Yang} \emph{et al.} \cite{Yang09}: probabilistic appearance model
+%			  method for tracking multiple people
+%		\vspace{0.1cm}
+%		\item ...
+%	\end{itemize}
+%\end{frame}
+
+\begin{frame}
+	\frametitle{Global vs Recursive Methods}
+	
+	\begin{table}[!t]
+		\centering
+		\begin{tabular}{ c | c | c | }
+			\cline{2-3}
+			& \textbf{Global Methods} & \textbf{Recursive Methods} \\ \hline
+			
+			\multicolumn{1}{|c|}{\textbf{Accuracy}} & medium/high & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Precision}} & \textbf{high} & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Robustness}} & \textbf{high} & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Computational Load}} & high & \textbf{low}/medium \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Real-time}} & no & \textbf{yes}/no \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	\vspace{0.4cm}
+	
+	Global methods are more precise and more robust but, on the other hand, they
+	cannot run in a real system because:
+	
+	\begin{itemize}
+		\item no information from the future are available (offline computation)
+		\item frame rate not suitable for real-time applications
+	\end{itemize}
+\end{frame}

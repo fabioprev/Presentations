@@ -1,0 +1,43 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Distributed Interactive Navigation through Intention-Aware Reasoning]{\Large Distributed Interactive Navigation in Dynamic Environments through Intention-Aware Counterfactual Reasoning}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\large\textbf{Fabio Previtali}\\Alejandro Bordallo Mic\'o\\Ramamoorthy Subramanian}
+
+\date[February 26, 2015]{\small Ro.Co.Co Group Meeting\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{InferenceMethod}
+\input{Architecture}
+\input{Experiments}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{RAD}
+
+\end{document}

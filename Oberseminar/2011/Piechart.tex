@@ -1,0 +1,60 @@
+\usepackage{calc}
+\usepackage{ifthen}
+
+% Pie chart
+% Author: Robert Vollmert
+\newcounter{temp}
+
+
+% calculate the anchor of the external label
+\newcommand{\angledir}[1]{
+  \setcounter{temp}{#1}
+
+  \ifthenelse{\thetemp < 0}{\addtocounter{temp}{360}}{}
+  \ifthenelse{\thetemp > 360}{\addtocounter{temp}{-360}}{}
+
+  \ifthenelse{\thetemp < 11}{\def\piedir{right}}{
+  \ifthenelse{\thetemp < 80}{\def\piedir{above right}}{
+  \ifthenelse{\thetemp < 101}{\def\piedir{above}}{
+  \ifthenelse{\thetemp < 170}{\def\piedir{above left}}{
+  \ifthenelse{\thetemp < 191}{\def\piedir{left}}{
+  \ifthenelse{\thetemp < 260}{\def\piedir{below left}}{
+  \ifthenelse{\thetemp < 281}{\def\piedir{below}}{
+  \ifthenelse{\thetemp < 350}{\def\piedir{below right}}{
+    right}}}}}}}}%
+}
+
+% calculate the position of the internal label
+\newcommand{\calcpiedist}[1]{%
+  \ifthenelse{#1 > 120}{\def\piedist{0.50}}{
+  \ifthenelse{#1 < 10}{\def\piedist{0.80}}{
+    \setcounter{temp}{(80 * (120-#1) + 50 * (#1-10))/110}
+    \def\piedist{0.\thetemp}}}
+}
+
+% draw a slice of a pie chart
+% The diffI and diffII counters are just a quick hack for making the
+% code compatible with PGF 1.18
+% The code should be rewritten to utilize the new math engine.
+\newcounter{diffI}
+\newcounter{diffII}
+\newcommand{\slice}[5]{%
+  \setcounter{temp}{(#1+#2)/2}
+  \setcounter{diffI}{#1-\thetemp}
+  \setcounter{diffII}{#2-\thetemp}
+  \begin{scope}[rotate=\thetemp]
+  %\pgfmathparse{#1-\thetemp}
+    \draw[fill=#5,join=round]
+                                (0,0)
+                             -- (\thediffI:1)
+                             arc (\thediffI:\thediffII:1)
+                             -- cycle;
+    \angledir{\thetemp}
+    \node [\piedir] at (1,0) {#4};
+    \setcounter{temp}{#2-#1}
+    \calcpiedist{\thetemp}
+    \node at (\piedist,0) {#3};
+
+  \end{scope}
+}
+

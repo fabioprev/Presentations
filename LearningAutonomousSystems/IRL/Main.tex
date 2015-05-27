@@ -1,0 +1,42 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{dsfont}
+\usepackage{setspace}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Inverse Reinforcement Learning]{\Large Inverse Reinforcement Learning}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\large\textbf{Fabio Previtali}}
+
+\date[March 20, 2015]{\small Learning in Autonomous Systems\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{Theory}
+\input{IRL}
+\input{ActivityForecasting}
+
+\end{document}

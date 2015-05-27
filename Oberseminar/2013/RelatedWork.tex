@@ -1,0 +1,41 @@
+\section{Related Work}
+
+\begin{frame}
+	\frametitle{Data Fusion Approaches}
+	
+	\begin{itemize}
+		\item Synchronous algorithm based on the exchange of Gaussian Mixture Model (GMM) parameters that are
+			  evaluated using a distributed Expectation-Maximization method \cite{Gu07}
+		\vspace{0.2cm}
+		\item Centralized approach that clusterizes the particle cloud in order to detect the targets' poses
+			  \cite{Wu08}
+		\vspace{0.2cm}
+		\item Distributed approach where the posterior probability is evaluated using a gossiping protocol for data
+			  dissemination \cite{Oreshkin10}
+	\end{itemize}
+	
+	\vspace{0.4cm}
+	
+	\tiny 1. \emph{G. Dongbing, ``Distributed Particle Filter for Target Tracking'' in IEEE International Conference on Robotics and Automation, 2007}\\
+	\vspace{0.2cm}
+	\tiny 4. \emph{B. N. Oreshkin and M. J. Coates, ``Asynchronous distributed particle filter via decentralized evaluation of Gaussian products'' in International Conference on Information Fusion, 2010}\\
+	\vspace{0.2cm}
+	\tiny 7. \emph{Y. Wu, X. Tong, Y. Zhang and H. Lu, ``Boosted Interactively Distributed Particle Filter for automatic multi-object tracking'' in IEEE International Conference on Image Processing, 2008}\\
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking algorithm}
+	
+	\large
+	
+	Having these three papers presented in mind, we propose a filter that exploits a particular aspect of each of the
+	cited work.
+	\vspace{0.2cm}
+	\begin{itemize}
+		\item GMM technique to lower the overall communication overhead
+		\vspace{0.2cm}
+		\item A modified clusterization algorithm to track a number of objects not known a priori
+		\vspace{0.2cm}
+		\item An asynchronous approach to avoid the synchronization problems
+	\end{itemize}
+\end{frame}

@@ -1,0 +1,50 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Multi-Robot System Evaluation]{\Large Multi-Robot System Evaluation}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[January 31, 2013]{Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\Large
+
+\input{Summary}
+
+\begin{Large}
+
+\input{Introduction}
+\input{MultiRobotSystems}
+\input{Conclusions}
+
+\end{Large}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{MRSE}
+
+\end{document}

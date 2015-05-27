@@ -1,0 +1,49 @@
+\documentclass{beamer}
+
+\include{Piechart}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{multimedia}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{mathptmx}
+\usepackage{helvet}
+\usepackage[T1]{fontenc}
+
+\title[Multi-Clustered PF for DDF]{Multi-Clustered Particle Filter for Distributed Data Fusion}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\textbf{Fabio Previtali}}
+
+\date[19/07/2011]{Master Thesis - Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction.tex}
+\input{Algorithm.tex}
+\input{Results.tex}
+\input{Conclusion.tex}
+
+\end{document}

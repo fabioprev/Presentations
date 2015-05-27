@@ -1,0 +1,48 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[PTracking open source library]{\Large PTracking: a distributed open source library that exploits a clustering technique to track multiple objects}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[May 13, 2013]{Oberseminar 2013\\Groningen, The Netherlands}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Outline}
+\input{Introduction}
+\input{RelatedWork}
+\input{MCPF}
+\input{Conclusions}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{PTracking}
+\nocite{Hampapur05}
+\nocite{Pless00}
+\nocite{Haritaoglu00}
+\nocite{Stauffer00}
+
+\end{document}

@@ -1,0 +1,32 @@
+% Copyright 2007 by Till Tantau
+%
+% This file may be distributed and/or modified
+%
+% 1. under the LaTeX Project Public License and/or
+% 2. under the GNU Public License.
+%
+% See the file doc/licenses/LICENSE for more details.
+
+\ProvidesPackageRCS $Header: /cvsroot/latex-beamer/latex-beamer/themes/theme/beamerthemeRome.sty,v 1.8 2007/01/28 20:48:30 tantau Exp $
+
+\mode<presentation>
+
+\newif\ifbeamer@institute
+\beamer@institutetrue
+\newif\ifbeamer@shadow
+\beamer@shadowtrue
+
+\DeclareOptionBeamer{noinstitute}{\beamer@institutefalse}
+\DeclareOptionBeamer{noshadow}{\beamer@shadowfalse}
+\ProcessOptionsBeamer
+
+\usepackage{StyleFiles/Outer} %\useoutertheme{dis}
+\usepackage[shadow,institute]{StyleFiles/Inner} %\useinnertheme[shadow,institute]{roundeddis}
+
+\usepackage{StyleFiles/Font} %\usefonttheme[onlylarge]{structurebold}
+\setbeamerfont{subtitle}{size=\normalsize,parent=title,series=\mdseries}
+\setbeamerfont{date in title page}{size=\footnotesize,parent=title,series=\mdseries,shape=\itshape}
+\usepackage{StyleFiles/Color} %\usecolortheme{dis}
+
+\mode
+<all>

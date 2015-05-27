@@ -1,0 +1,115 @@
+\section{Introduction to Multi-Robot Systems}
+
+\begin{frame}
+	\frametitle{Multi-Robot System (MRS)}
+	
+	\begin{itemize}
+		\item \textbf{a team of robots}
+			
+			\begin{itemize}
+				\item homogeneous/heterogeneous
+				
+				\item sensors (laser, camera, etc.)
+				
+				\item actuators (wheels, legs, etc.)
+			\end{itemize}			
+		\item \textbf{a communication protocol}
+			
+			\begin{itemize}
+				\item what information are shared
+				
+				\item how?
+			\end{itemize}
+		\item \textbf{assumptions}
+			
+			\begin{itemize}
+				\item synchronized clock
+				
+				\item messages delivered in at most \emph{n} seconds
+				
+				\item ...
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{How do we can evaluate a MRS?}
+	
+	\textbf{Metrics}
+	
+	\begin{itemize}
+		\item Task dependent
+		
+		\begin{itemize}
+			\normalsize
+			
+			\item object estimation accuracy (tracking system)
+			
+			\item time needed to built a map (SLAM)
+		\end{itemize}
+		
+		\item Task independent
+		
+		\begin{itemize}
+			\normalsize
+			
+			\item overall system performance
+			
+			\item network usage and overhead
+		\end{itemize}
+	\end{itemize}
+	
+	\textbf{Different from simulated and real environments}	
+	
+	\begin{itemize}
+		\normalsize
+		
+		\item Ground-truth acquisition\\
+		
+		\vspace{-0.2cm}
+		
+		\begin{tabbing}
+			\hspace*{0.3cm}
+			simulation $ \leadsto $ \textbf{easy} but \textbf{no} realist results\\
+			
+			\hspace*{0.3cm}
+			real $ \leadsto $ \textbf{difficult} but accurate results
+		\end{tabbing}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Bad vs Good evaluation}
+	
+	\begin{itemize}
+		\item \textcolor{red}{\textbf{Bad evaluation}}
+		\vspace{-0.1cm}
+		
+		\begin{tabbing}
+			\normalsize
+			\hspace*{0.4cm}
+			$ \leadsto $ \textbf{rough} system evaluation\\
+			
+			\normalsize
+			\hspace*{0.4cm}
+			$ \leadsto $ \textbf{impossible} to compare with literature's work
+		\end{tabbing}
+		
+		\item \textcolor{red}{\textbf{Good evaluation}}
+		\vspace{-0.1cm}
+		
+		\begin{tabbing}
+			\normalsize
+			\hspace*{0.4cm}
+			$ \leadsto $ \textbf{robust} system evaluation\\
+			
+			\normalsize
+			\hspace*{0.4cm}
+			$ \leadsto $ possibility to compare with literature's work\\
+			
+			\normalsize
+			\hspace*{0.4cm}
+			$ \leadsto $ hopefully used by the community as \textbf{comparison test}
+		\end{tabbing}
+	\end{itemize}
+\end{frame}

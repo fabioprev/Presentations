@@ -1,0 +1,39 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Dimensionality Reduction for Data Visualization]{\Large Dimensionality Reduction for Data Visualization\\ \small Seminar on the CITEC Ph.D. Summer School}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[17th October 2013]{17th October 2013\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Outline}
+\input{Motivation}
+\input{Methods}
+\input{Evaluation}
+
+\end{document}

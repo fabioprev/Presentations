@@ -1,0 +1,312 @@
+\section{Experimental Results}
+
+\begin{frame}
+	\frametitle{Performance Evaluation}
+	\begin{itemize}
+		\item The effectiveness of our approach compared to Multi-Filter Particle Filtering approach as proposed in
+			  [Okuma et al, 2004]\footnote{K. Okuma, A. Taleghani, N. d. Freitas, J. J. Little, and D. G. Lowe, \\
+			  \hspace{0.6cm}\emph{``A boosted particle filter: Multitarget detection and tracking''}, 2004} and 
+			  [Wu et al, 2008]\footnote{Y. Wu, X. Tong, Y. Zhang, and H. Lu,\\\hspace{0.6cm}\emph{``Boosted
+			  interactively distributed particle filter for automatic multi-object\\\hspace{0.6cm}tracking''}, 2008}
+		\item Several metrics are used, to cover the majors interesting aspects of the DDFS
+		\item Multiple maps are used to increase reliability of results
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Simulation Setup}
+	\begin{columns}[T]
+		\column{.6\textwidth}
+		
+		\begin{itemize}
+			\item Player/Stage simulator
+				\begin{itemize}
+					\item 4 different maps
+					\item each map has an area $\sim 600 m^2$
+					\item $90\%$ of each map is empty space
+				\end{itemize}
+				\vspace{0.4cm}
+			\item Agent sensor field of view
+				\begin{itemize}
+					\item $\rho = 10m$
+					\item $\theta = 62^{\circ}$
+					\item $\leadsto$ area = $\frac{\rho^2\theta}{2} \sim 54 \mathrm{m}^2$
+				\end{itemize}
+				\vspace{0.4cm}
+			\item Operational assumptions
+				\begin{itemize}
+					\item Random paths
+					\item Synchronized agents
+					\item Fully distributed
+				\end{itemize}
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
+			\node at (-1.1,0.8) [map] {\includegraphics[height=1.2cm,width=1.8cm]{Maps/Edmonton}};
+			\node at (-1.3,-0.1) [map] {\includegraphics[height=1.2cm,width=1.8cm]{Maps/Longwood}};
+			\node at (0.3,-0.4) [map] {\includegraphics[height=1.2cm,width=1.8cm]{Maps/Mexico}};
+			\node at (0.2,0.6) [map,draw=red!70!black] {\includegraphics[height=1.4cm,width=2.1cm]{Maps/Lasermaze}};
+		\end{tikzpicture} \\
+		\vspace{0.1cm}
+		\begin{tikzpicture}
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=1.8cm]{Figures/Agent.pdf}};
+		\end{tikzpicture} \\
+		\vspace{0.2cm}
+		\begin{tikzpicture}
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[width=3cm]{Figures/Stage.png}};
+		\end{tikzpicture}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Simulation Setup - cont'd}
+	\framesubtitle{Artificial noise}
+	\begin{columns}[T]
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Gaussian noise
+				\begin{itemize}
+					\item added to measurements at every iteration
+				\end{itemize}
+			\vspace{0.5cm}
+			\item False positive
+				\begin{itemize}
+					\item the perception is changed with probability $ p $
+				\end{itemize}
+			\vspace{0.5cm}
+			\item True negative
+				\begin{itemize}
+					\item a perception is ignored with probability $ q $
+				\end{itemize}
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		\includegraphics[width=2.5cm]{Figures/ErrorGauss.pdf} \\
+		\vspace{0.1cm}
+		\includegraphics[width=2.5cm]{Figures/ErrorFalse.pdf} \\
+		\vspace{0.1cm}
+		\includegraphics[width=2.5cm]{Figures/ErrorTrue.pdf}
+	\end{columns}
+\end{frame}
+
+\pgfplotsset
+{
+	mcpc/.style={color=green!80!black,mark=triangle,draw,dashed,thick},
+	mcgauss/.style={color=red!80!black,mark=square,draw,densely dotted,thick},
+	mfpc/.style={color=blue!80!white,mark=o,draw,dashed,thick},
+	mfgauss/.style={color=magenta,mark=star,draw,densely dotted,thick},
+	axis/.style={color=black!90},
+	grid/.style={very thin, dashed, color=gray, step=0.2cm},
+	ymin=0,
+	xmin=0.17,
+	xmax=1.02,
+	tick label style={font=\tiny},
+	y tick label style={rotate=90},
+	width=6.5cm,
+	height=3.3cm,
+	x label style={inner sep=-2pt},
+	axis y line*=right,
+	figtop/.style={xtick=\empty},
+	figmiddle/.style={yshift=-50,axis x line*=bottom,xtick=\empty},
+	figbottomT/.style={yshift=-100,axis x line*=bottom,xlabel=\scriptsize{$\Delta_{\mathcal{A}}$},},
+	legend style={font=\tiny,baseline}
+}
+
+\tikzset
+{
+	smooth,
+	mark options={solid,thick}
+}
+
+\begin{frame}
+	\frametitle{Evaluation Metrics}
+		\begin{itemize}
+			\item Root Mean Squared Error
+				\begin{eqnarray*}
+					\delta_r = \min_{s = 1}^{\mathcal{S}} \{\|s,r\|\},
+					RMSE = \sqrt{\frac{\sum_{r = 1}^{\mathcal{R}} \delta_r}{R}}.
+				\end{eqnarray*}
+				
+				\item Execution Time
+					\begin{itemize}
+						\item fraction of time used by MAS algorithm
+					\end{itemize}
+				\item Detection rate
+					\begin{displaymath}
+						DR =
+						\left\{
+							\begin{array}{rl}
+								100.0 & \mbox{if } R \leq S \\
+								\{1.0 - [(R - S) / R]\} * 100.0 & \mbox{otherwise}.
+							\end{array}
+						\right.
+					\end{displaymath}
+				\item False detection rate
+					\begin{displaymath}
+						FR =
+						\left\{
+							\begin{array}{rl}
+								0.0 & \mbox{if } R \geq S \\
+								\{1.0 - [(S - R) / S]\} * 100.0 & \mbox{otherwise}.
+							\end{array}
+						\right.
+					\end{displaymath}
+		\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results}
+	\framesubtitle{Root Mean Squared Error}
+	\begin{columns}
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Our approach overtakes the Multi-Filter in terms of performance
+			\item Mean error is significantly smaller
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+	\begin{center}
+		\begin{tikzpicture}
+			\def\respath{Results/Edmonton/RMSE/Edmonton}
+			\foreach \res/\fig/\leg in {0.2/figtop/legend columns=-1,0.6/figmiddle/legend columns=-1,1.0/figbottomT/{legend columns=-1,legend entries={MC-PC,MC-G,MF-PF,MF-G},legend to name=named}}
+			{
+				\draw node[rotate=90] at (-0.4,-4.3*\res+2) {\scriptsize{$\res$}};
+				\begin{axis}[ymax=14,\fig,\leg]
+					\addplot[mcpc] file {\respath.MC-PC.\res.dat};
+					\addplot[mcgauss] file {\respath.MC-G.\res.dat};
+					\addplot[mfpc] file {\respath.MF-PC.\res.dat};
+					\addplot[mfgauss] file {\respath.MF-G.\res.dat};
+					\addplot[axis,color=black] coordinates {(0.17,0) (0.17,50)};
+				\end{axis}
+			}
+			\draw node[rotate=90] at (-0.4,-3.2) {\scriptsize{$\Delta_{\mathcal{T}}$}};
+		\end{tikzpicture} \\
+		
+		\vspace{0.1cm}
+		
+		\ref{named}
+	\end{center}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results - cont'd}
+	\framesubtitle{Execution Time}
+	\begin{columns}
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Clustering phase lasts longer and it is present just in our approach
+			\item Both algorithms are very fast
+			\item Particle Clouds approach runs faster than Gaussian one
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\def\respath{Results/Edmonton/ET/Edmonton.ET}
+			\foreach \res/\fig in {0.2/figtop,0.6/figmiddle,1.0/figbottomT}
+			{
+				\draw node[rotate=90] at (-0.4,-4.3*\res+2) {\scriptsize{$\res $}};
+				\begin{axis}[ymax=50,ytick={25,50},\fig,yticklabels={25\%,50\%}]
+					\addplot[mcpc] file {\respath.MC-PC.\res.dat};
+					\addplot[mcgauss] file {\respath.MC-G.\res.dat};
+					\addplot[mfpc] file {\respath.MF-PC.\res.dat};
+					\addplot[mfgauss] file {\respath.MF-G.\res.dat};
+					\addplot[grid] coordinates {(0.17,25) (1.02,25)};
+					\addplot[axis,color=black] coordinates {(0.17,0) (0.17,50)};
+				\end{axis}
+				\draw node[rotate=90] at (-0.4,-3.2) {\scriptsize{$\Delta_{\mathcal{T}}$}};
+			}
+		\end{tikzpicture} \\
+		
+		\vspace{0.1cm}
+		
+		\ref{named}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results - cont'd}
+	\framesubtitle{Detection Rate}
+	\begin{columns}
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Multi-Filter is more accurate in detecting targets
+				\begin{itemize}
+					\item This can be explained considering that MF is more reactive on generating filters to follow new
+						  targets
+				\end{itemize}
+			\item Our approach, instead, in case of targets close to each other fails on creating separated cluster
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\def\respath{Results/Edmonton/DR/Edmonton.DR}
+			\foreach \res/\fig in {0.2/figtop,0.6/figmiddle,1.0/figbottomT}
+			{
+				\draw node[rotate=90] at (-0.4,-4.3*\res+2) {\scriptsize{$\res $}};
+				\begin{axis}[ymax=100,ytick={50,100},\fig,yticklabels={50\%,100\%}]
+					\addplot[mcpc] file {\respath.MC-PC.\res.dat};
+					\addplot[mcgauss] file {\respath.MC-G.\res.dat};
+					\addplot[mfpc] file {\respath.MF-PC.\res.dat};
+					\addplot[mfgauss] file {\respath.MF-G.\res.dat};
+					\addplot[grid] coordinates {(0.17,50) (1.02,50)};
+					\addplot[axis,color=black] coordinates {(0.17,0) (0.17,100)};
+				\end{axis}
+				\draw node[rotate=90] at (-0.4,-3.2) {\scriptsize{$\Delta_{\mathcal{T}}$}};
+			}
+		\end{tikzpicture} \\
+		
+		\vspace{0.1cm}
+		
+		\ref{named}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Results - cont'd}
+	\framesubtitle{False Positive Detection Rate}
+	\begin{columns}
+		\column{.5\textwidth}
+		
+		\begin{itemize}
+			\item Our Multi-Clustered approach has a negligible error in false targets detection
+			\item $ \leadsto $ this is an important results towards real-world applications
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\def\respath{Results/Edmonton/FR/Edmonton.FR}
+			\foreach \res/\fig in {0.2/figtop,0.6/figmiddle,1.0/figbottomT}
+			{
+				\draw node[rotate=90] at (-0.4,-4.3*\res+2) {\scriptsize{$\res $}};
+				\begin{axis}[ymax=50,ytick={25,50},\fig,yticklabels={25\%,50\%}]
+					\addplot[mcpc] file {\respath.MC-PC.\res.dat};
+					\addplot[mcgauss] file {\respath.MC-G.\res.dat};
+					\addplot[mfpc] file {\respath.MF-PC.\res.dat};
+					\addplot[mfgauss] file {\respath.MF-G.\res.dat};
+					\addplot[grid] coordinates {(0.17,25) (1.02,25)};
+					\addplot[axis,color=black] coordinates {(0.17,0) (0.17,50)};
+				\end{axis}
+				\draw node[rotate=90] at (-0.4,-3.2) {\scriptsize{$\Delta_{\mathcal{T}}$}};
+			}
+		\end{tikzpicture} \\
+		
+		\vspace{0.1cm}
+		
+		\ref{named}
+	\end{columns}
+\end{frame}
