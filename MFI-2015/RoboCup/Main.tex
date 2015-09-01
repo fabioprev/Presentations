@@ -20,13 +20,18 @@
 \usepackage{marvosym}
 \usepackage[algoruled]{algorithm2e}
 \usepackage{algorithmic,algorithm2e,float}
+\usepackage{verbatimbox}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
 
 \setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
 
 \definecolor{darkgreen}{RGB}{0,180,0}
 \definecolor{lightred}{RGB}{210,0,0}
 
-\title[Disambiguating Localization Symmetry Through a M-C PF]{\Large Disambiguating Localization Symmetry Through a Multi-Clustered Particle Filtering}
+\title[Disambiguating Localization Symmetry through a M-C PF]{\Large Disambiguating Localization Symmetry through a Multi-Clustered Particle Filtering}
 
 \subtitle{}
 
@@ -42,6 +47,7 @@
 
 \input{Introduction}
 \input{PTracking}
+\input{Disambiguation}
 \input{Experiments}
 \input{Conclusions}
 
