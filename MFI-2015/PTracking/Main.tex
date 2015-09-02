@@ -1,0 +1,54 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{dsfont}
+\usepackage{setspace}
+\usepackage{marvosym}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{algorithmic,algorithm2e,float}
+\usepackage{verbatimbox}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\definecolor{darkgreen}{RGB}{0,180,0}
+\definecolor{lightred}{RGB}{210,0,0}
+
+\title[PTracking: Distributed Multi-Agent Multi-Object Tracking through M-C PF]{\Large PTracking: Distributed Multi-Agent Multi-Object Tracking
+through Multi-Clustered Particle Filtering}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\small\textbf{Fabio Previtali}\\Luca Iocchi}
+
+\date[September 15, 2015]{\scriptsize International Conference on Multisensor Fusion and Integration for Intelligent Systems\\San Diego, USA}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{PTracking}
+\input{Experiments}
+\input{Conclusions}
+
+\end{document}
