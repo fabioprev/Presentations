@@ -1,0 +1,97 @@
+\section{Related Work - Tracking}
+
+\begin{frame}
+	\frametitle{Related Work}
+	\framesubtitle{Multi-object tracking}
+	
+	\Large
+	
+	\vspace{0.6cm}
+	
+	Multi-object tracking algorithms can be classified into two groups (Andriyenko \emph{et al.}
+	\cite{Andriyenko11}):
+	
+	\begin{itemize}
+		\item \textbf{Global} (or \emph{offline}): formulating the tracking problem as an optimisation
+			  one, where all the trajectories within a temporal window are optimised jointly
+		\item \textbf{Recursive} (or \emph{online}): estimating the current state relying only on the
+			  current observations and on the previous state
+	\end{itemize}
+	
+	\vspace{0.45cm}
+	
+	\tiny
+	
+	[1] A. Andriyenko \emph{et al.}, ``An analytical formulation of global occlusion reasoning for
+		multi target tracking'', ICCV, 2011
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multi-Object Tracking}
+	\framesubtitle{Global methods}
+	
+	\Large
+	
+	\vspace{0.2cm}
+	
+	\begin{itemize}
+		\item \textbf{Berclaz} \emph{et al.} \cite{Berclaz11}: mathematically sound
+			  multiple object tracking framework based on a k-shortest path optimization
+			  algorithm
+		\vspace{0.1cm}
+		\item \textbf{Leal-Taix{\'e}} \emph{et al.} \cite{Leal11}: formulate a new graph
+			  model for the multiple object tracking challenge by minimizing a network flow
+			  problem
+		\vspace{0.1cm}
+		\item \textbf{Henriques} \emph{et al.} \cite{Henriques11}: 
+		\vspace{0.1cm}
+		\item ...
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Multi-Object Tracking}
+	\framesubtitle{Recursive methods}
+	
+	\Large
+	
+	\vspace{0.2cm}
+	
+	\begin{itemize}
+		\item \textbf{Breitenstein} \emph{et al.} \cite{Breitenstein11}: online method for
+			  multi-person tracking-by-detection in a particle filtering framework
+		\vspace{0.1cm}
+		\item \textbf{Yang} \emph{et al.} \cite{Yang09}: probabilistic appearance model
+			  method for tracking multiple people
+		\vspace{0.1cm}
+		\item \textbf{Bae} \emph{et al.} \cite{Bae14}: 
+		\vspace{0.1cm}
+		\item ...
+	\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Global vs Recursive Methods}
+	
+	\Large
+	
+	\begin{table}[!t]
+		\centering
+		\begin{tabular}{ c | c | c | }
+			\cline{2-3}
+			& \textbf{Global} & \textbf{Recursive} \\ \hline
+			
+			\multicolumn{1}{|c|}{\textbf{Accuracy}} & medium/high & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Precision}} & \textbf{high} & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Robustness}} & \textbf{high} & medium/high \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Computational Load}} & high & \textbf{low}/medium \\ \hline
+			\multicolumn{1}{|c|}{\textbf{Real-time}} & no & \textbf{yes}/no \\ \hline
+		\end{tabular}
+	\end{table}
+	
+	Global methods are more precise and robust but they cannot be used in real systems:
+	\begin{itemize}
+		\item No information from the future are available
+		\item Frame rate not suitable for real-time applications
+	\end{itemize}
+\end{frame}
