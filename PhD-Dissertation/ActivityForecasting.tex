@@ -1,45 +1,22 @@
 \section{Activity Forecasting}
 
 \begin{frame}
-	\frametitle{Future Directions}
-	\framesubtitle{Activity forecasting}
+	\frametitle{Predicting Future Agent Motions}
 	
-	\vspace{0.4cm}
-	
-	Kitani \emph{et al.} proposed a novel method for activity forecasting
-	by combining:
-	
-	\begin{itemize}
-		\item Semantic scene understanding
-		\vspace{0.05cm}
-		\item Inverse Reinforcement Learning
-	\end{itemize}
-	
-	\begin{center}
-		\begin{tikzpicture}
-			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[scale=0.19]{Figures/ActivityForecasting.png}
-			};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Activity Forecasting}
-	
-	\vspace{0.35cm}
+	\vspace{0.2cm}
 	
 	\begin{block}{Idea}
-		Performing activity forecasting resolving an \textbf{Inverse Reinforcement
-		Learning} problem \textbf{without} needing a labeled environment, by combining:
-		
+		Performing activity forecasting resolving an \textbf{Inverse Reinforcement Learning} problem
+		\textbf{without} needing a labelled environment, by combining:
+		\vspace{0.05cm}
 		\begin{itemize}
-			\item object trajectories provided by \emph{PTracking}
-			\item representation of the environment following the \emph{grid world} schema
-				  defined by Russell \emph{et al.}
+			\item Object trajectories provided by \emph{PTracking}
+			\item Representation of the environment following the \emph{grid world} schema defined by
+				  Russell et al. \cite{Ng00}
 		\end{itemize}
 	\end{block}
+	
+	\vspace{-0.1cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
@@ -49,44 +26,257 @@
 			};
 		\end{tikzpicture}
 	\end{center}
+	
+	\vspace{-0.34cm}
+	
+	\tiny
+	
+	[10] A.Y. Ng \emph{et al.},  ``Algorithms for inverse reinforcement learning'', ICML, 2000
 \end{frame}
 
 \begin{frame}
-	\frametitle{Activity Forecasting}
-	\framesubtitle{IRL problem}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Contributions}
 	
-	\large
+	\Large
 	
-	\begin{eqnarray*}
-		maximize \sum_{i=1}^N min_{a \in \{a_1, \ldots, a_k \}} \Big \{ [ \mathbf{P}_{a_*}(i) - \mathbf{P}_a(i) ] ( \mathbf{I} - \gamma \mathbf{P}_{a_*})^{-1} \mathbf{R} \Big \} - \lambda \| \mathbf{R} \|_1 \\ \\
-		s.t. \;\;\; (\mathbf{P}_{a_*} - \mathbf{P}_a)(\mathbf{I} - \gamma \mathbf{P}_{a_*})^{-1} \mathbf{R} \succeq 0 \;\;\;\;\;\;\;\; \forall a \in A \; \backslash \; a_* \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; \\
-		| \mathbf{R}_i | \leq R_{max} \;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\; i \in \{ 1, \ldots, N \} \;\;\;\;\;\;\;\;\;\;\;\;\,\,
-	\end{eqnarray*}
+	\vspace{0.4cm}
+	
+	We propose an integrated framework, which relies on \emph{PTracking}, for estimating future movement
+	intentions of goal-oriented agents, that:
+	
+	\vspace{0.15cm}
+	
+	\begin{enumerate}
+		\item \textbf{Does not} rely on semantic scene labelling
+		\item \textbf{Incrementally} updates the IRL model over time
+		\item Makes use of \textbf{non-uniform grids} for representing the state of the environment
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Approach}
+	
+	\vspace{-0.1cm}
+	
+	\begin{columns}[T]
+		\column{.4\textwidth}
+		
+		\vspace{-0.2cm}
+		
+		\begin{equation*}
+			\hspace{0.3cm}
+			\scriptsize
+			\begin{array}{ll}
+				\min \sum\nolimits_{i=1}^N -x_i + \lambda (r_i^+ - r_i^-)
+				\vspace{-0.35cm} \\ \\
+				s.t. \\ \;\;\;\;
+				\left \{
+					\begin{array}{ll}
+						x_i \leq (\mathbf{P}_{a_*} - \mathbf{P}_a)(\mathbf{I} - \gamma
+						\mathbf{P}_{a_*})^{-1} \mathbf{R} \\
+						\vspace{-0.25cm} \\
+						\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;\;
+						\;\;\; \forall \, a \in \mathbf{A}, \; i \in \{ 1, \ldots, N \}
+						\vspace{-0.25cm}\\ \\
+						x_i \geq 0 \;\;\;\;\;\;\,\,\,\,\;\;\;\,\,\,\,\,\;\,\,\,\,\,\,\,\;\;\;\;\;
+						\;\,\,\,\,\, i \in \{ 1, \ldots, N \}
+						\vspace{-0.25cm} \\ \\
+						r_i = r_i^+ + r_i^- \;\,\,\,\,\,\;\,\,\,\,\,\,\,\;\;\;\;\;
+						\;\,\,\,\,\, i \in \{ 1, \ldots, N \}
+						\vspace{-0.25cm}
+						\\ \\
+						| \mathbf{R}_i | \leq R_{max} \;\;\;\;\;\;\;\;\;\;\;\,\,\,\,\;\;\
+						\,\,\,\,\,\, i \in \{ 1, \ldots, N \}
+					\end{array}
+				\right.
+				\vspace{0.2cm}
+			\end{array}
+		\end{equation*}
+		
+		\tiny
+		
+		\vspace{-0.8cm}
+		
+		\begin{tabbing}
+			\hspace{0.2cm}
+			Adapted formalisation of [Ng \& Russel, 2000]
+		\end{tabbing}
+		
+		\vspace{-1cm}
+		
+		\column{.15\textwidth}
+		
+		\centering
+		\vspace{1.3cm}
+		
+		\begin{tabbing}
+			\hspace{1.5cm}
+			\Huge
+			\textcolor{red}{\textbf{+}}
+		\end{tabbing}
+		
+		\column{.45\textwidth}
+		\centering
+		
+		\vspace{0.4cm}
+		
+		\begin{tikzpicture}
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=4.8cm]{Figures/RecursiveNonUniformGrids}
+			};
+		\end{tikzpicture}
+	\end{columns}
 	
 	\vspace{0.2cm}
 	
-	where
+	\begin{columns}[T]
+		\column{.35\textwidth}
+		
+		\begin{tikzpicture}
+			\hspace{0.2cm}
+			\centering
+			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=3.2cm]{Figures/IRL-Model}
+			};
+		\end{tikzpicture}
+		
+		\column{.2\textwidth}
+		
+		\centering
+		\vspace{1.1cm}
+		
+		\begin{tabbing}
+			\hspace{1.975cm}
+			\Huge
+			\textcolor{red}{\textbf{$ \Rightarrow $}}
+		\end{tabbing}
+		
+		\column{.45\textwidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=4.8cm]{Figures/Motivation}
+			};
+		\end{tikzpicture}
+	\end{columns}
 	
-	\begin{itemize}
-		\item $ \mathbf{R} $ is the \textbf{reward} vector
-		\item $ \mathbf{P}_a $ is the \textbf{state transition probabilities} for action
-			  $ a $
-		\item $ \mathbf{P}_a(i) $ denotes the $ i $-th row of $ \mathbf{P}_a $
-		\item $ \gamma $ is the \textbf{discount factor}
-		\item $ \lambda $ is a \textbf{penalty factor}
-	\end{itemize}
+	\begin{columns}[T]
+		\column{\textwidth}
+		
+		\centering
+		\vspace{-3.1cm}
+		\hspace{-1cm}
+		\Huge
+		\begin{rotate}{-45}
+			
+			\textcolor{blue}{\textbf{$ \Downarrow $}}
+		\end{rotate}	
+	\end{columns}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Activity Forecasting}
-	\framesubtitle{Reward function}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Policy Generation}
+	
+	\LARGE
+	
+	\vspace{1cm}
+	
+	The output of the optimisation process is a \textbf{set of $ \mathbf{G}^1 $ reward function models},
+	one for each goal, $ \mathbf{\mathcal{M}_s^G} $ per agent $ s $. \\
+	
+	\vspace{0.4cm}
+	
+	This allows us to generate a policy $ \pi_s^{G_i} $ for each goal $ G_i \in G $ per agent $ s $. \\
+	
+	\vspace{1.3cm}
+	
+	\normalsize
+	
+	1. Goals can be \emph{statically} chosen or \emph{generated} by analysing tracking data
+\end{frame}
+
+\begin{frame}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Observed Trajectory Extraction}
+	
+	\LARGE
+	
+	\vspace{0.4cm}
+	
+	We gather object estimates from \emph{PTracking} considering an arbitrary temporal window. \\
+	
+	\vspace{0.4cm}
+	
+	Having acquired a set of trajectories $ \mathcal{U} $, we \textbf{ground} each trajectory $ u \in
+	\mathcal{U} $ in every policy $ \pi_s^G $. \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Policy Comparison}
+	
+	\LARGE
+	
+	\vspace{0.1cm}
+	
+	We get the best fitting policy by \textbf{comparing} the target trajectory against a
+	set of trajectories drawn from potential optimal policies. \\
+	
+	\vspace{0.4cm}
+	
+	We use a combination of \emph{Fr\'echet distance} and \emph{cosine similarity}, to
+	allow for the possibility that the target trajectory is merely a fragment of the
+	overall optimal policy. \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Goal Prediction}
+	
+	\Large
+	
+	\vspace{0.25cm}
+	
+	We \textbf{predict in real-time} the goal toward which each moving object is likely to be headed,
+	by executing the policy that best matches its movement pattern.
+	
+	\vspace{-0.1cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
-			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[width=\linewidth]{Figures/Reward}
+				\includegraphics[width=0.59\linewidth]{Figures/Motivation}
 			};
 		\end{tikzpicture}
 	\end{center}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Predicting Future Agent Motions}
+	\framesubtitle{Anomaly Detection}
+	
+	\LARGE
+	
+	\vspace{0.5cm}
+	
+	It could happen that a trajectory $ u \in \mathcal{U} $ does not match any model:
+	\begin{itemize}
+		\item A trajectory fragment $ u $ is \textbf{anomalous} and refers to a \emph{suspicious
+			  activity pattern}
+		\item Environment has changed leading to new types of motion
+			  \vspace{-0.25cm}
+			  \begin{tabbing}
+				  \hspace{0.3cm}
+				  \large
+				  $ \leadsto $ \emph{can be recognised by analysing the foreground model}
+			  \end{tabbing}
+	\end{itemize}
 \end{frame}

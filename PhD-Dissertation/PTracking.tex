@@ -1,62 +1,222 @@
 \section{PTracking Algorithm}
 
 \begin{frame}
-	\frametitle{Distributed Particle Filtering for Multi-Agent Multi-Object Tracking}
+	\frametitle{PTracking}
+	\framesubtitle{Distributed Particle Filtering for Multi-Sensor Multiple Object Tracking}
 	
-	\Large
+	\LARGE
 	
 	\begin{block}{Idea}
-		Achieving both a \textbf{high} precision and a \textbf{high} robustness, as a
-		global method does, while keeping a \textbf{low} computational load in order to
-		obtain \textbf{real-time} performance, as recursive methods do
+		Achieving \textbf{high} precision and robustness, as a global method does, while trying to keep
+		a \textbf{low} computational load in order to obtain \textbf{real-time} performance, as
+		recursive methods do
 	\end{block}
 \end{frame}
 
 \begin{frame}
-	\frametitle{PTracking algorithm}
-	\framesubtitle{Pseudo-code}
+	\frametitle{PTracking}
+	\framesubtitle{Contributions}
 	
-	\begin{algorithm}[H]
-		\tiny
-		\caption{PTracking}
-		\KwIn{perceptions $ z_{s,t} $, local track numbers $ oi_{s,t-1} $, global track numbers $ OI_{s,t-1} $}
-		\BlankLine
-		\KwData{set of local particles $ \tilde{\xi}_{s,t} $, set of global particles $ \tilde{\xi}_{\mathcal{S'},t} $, local GMM set $ \mathcal{L} $, global GMM set $ \mathcal{G} $}
-		\BlankLine
-		\KwOut{global estimations $ x_{s,t} = (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) $}
-		\BlankLine
-		\Begin
-		{
-			$ \tilde{\xi}_{s,t} \sim \pi_t (x_{s,t} | x_{s,t-1},z_{s,t}) $
-			\BlankLine
-			Re-sample by using the SIR principle\\
-			\BlankLine
-			$ \mathcal{L} = KClusterize(\tilde{\xi}_{s,t}) $
-			\BlankLine
-			$ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) = DataAssociation(\mathcal{L}, oi_{s,t-1}) $
-			\BlankLine
-			Communicate the belief $ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $ to the other cameras
-		}
-		\BlankLine
-		\Begin
-		{
-			Collect $ \mathcal{L}_{S'} $ from a subset $ \mathcal{S'} \subseteq \mathcal{S} $ of the cameras within a period $ \Delta t $
-			\BlankLine
-			$ \tilde{\xi}_{\mathcal{S'},t} \sim \tilde\pi = \sum_{s \in \mathcal{S'}} \boldsymbol\lambda_{s,t} \, \mathcal{N} (\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $
-			\BlankLine
-			Re-sample by using the SIR principle\\
-			\BlankLine
-			$ \mathcal{G} = KClusterize(\tilde\xi_{{\mathcal{S'},t}}) $
-			\BlankLine
-			$ (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) = DataAssociation(\mathcal{G},OI_{s,t-1}) $
-		}
-	\end{algorithm}
+	\Large
+	
+	\vspace{0.2cm}
+	
+	We propose a novel technique based on \emph{Distributed Particle Filtering}. The key contributions
+	are:
+	
+	\vspace{0.15cm}
+	
+	\begin{enumerate}
+		\item \textbf{Real-time} multiple object tracking method
+		\item Novel clustering method that \textbf{keeps} track of multiple objects whose number is
+			  \textbf{not known} a priori, ensuring a \textbf{limited} Gaussian distribution in the
+			  particle space
+		\item \textbf{Asynchronous} algorithm to improve robustness with respect to communication
+			  failures and dead nodes
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}
-	\frametitle{PTracking algorithm}
-	\framesubtitle{Group tracking}
+	\frametitle{PTracking}
+	\framesubtitle{General Schema}
 	
+	\vspace{-0.27cm}
+	
+	\begin{columns}[T]
+		\column{.5\textwidth}
+		
+		\vspace{0.8cm}
+		
+		\begin{itemize}
+			\item \textbf{Input:} set of positions of the objects provided by a multi object detector
+				  system (e.g., \cite{Bloisi12})
+			
+			\vspace{1.6cm}
+			
+			\item \textbf{Output:} set of estimated trajectories of the moving objects over time
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		
+		\begin{tikzpicture}
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=6cm]{Figures/Detection}
+			};
+			\node at (0,-3.35) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=6cm]{Figures/Tracking}
+			};
+		\end{tikzpicture}
+	\end{columns}
+	
+	\vspace{0.3cm}
+	
+	\tiny
+	
+	[4] D. D. Bloisi \emph{et al.},  ``Independent Multimodal Background Subtraction'', CompIMAGE, 2012
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking}
+	\framesubtitle{Pseudo-code}
+	
+	\begin{columns}[T]
+		\column{.05\textwidth}
+		
+		\column{.55\textwidth}
+		
+		\only<1>
+		{
+			\begin{algorithm}[H]
+				\tiny
+				\KwIn{perceptions $ z_{s,t} $, local track numbers $ oi_{s,t-1} $, global track numbers $ OI_{s,t-1} $}
+				\BlankLine
+				\KwData{set of local particles $ \tilde{\xi}_{s,t} $, set of global particles $ \tilde{\xi}_{\mathcal{S'},t} $, sensor pose $ m_{s,t} $, local GMM set $ \mathcal{L} $, global GMM set $ \mathcal{G} $}
+				\BlankLine
+				\KwOut{global estimations $ x_{s,t} = (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) $}
+				\BlankLine
+				\Begin
+				{
+					\textcolor{darkgreen}{$ \tilde{\xi}_{s,t} \sim \pi_t (x_{s,t} | x_{s,t-1},z_{s,t},m_{s,t}) $}
+					\BlankLine
+					\textcolor{darkgreen}{Re-sample by using the SIR principle}\\
+					\BlankLine
+					\textcolor{darkgreen}{$ \mathcal{L} = KClusterize(\tilde{\xi}_{s,t}) $}
+					\BlankLine
+					\textcolor{darkgreen}{$ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) = DataAssociation(\mathcal{L}, oi_{s,t-1}) $}
+					\BlankLine
+					\textcolor{darkgreen}{Communicate belief $ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $ to other agents}
+				}
+				\BlankLine
+				\Begin
+				{
+					Collect $ \mathcal{L}_{S'} $ from a subset $ \mathcal{S'} \subseteq \mathcal{S} $ of
+					sensors within a $ \Delta t $
+					\BlankLine
+					$ \tilde{\xi}_{\mathcal{S'},t} \sim \tilde\pi = \sum_{s \in \mathcal{S'}} \boldsymbol\lambda_{s,t} \, \mathcal{N} (\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $
+					\BlankLine
+					Re-sample by using the SIR principle\\
+					\BlankLine
+					$ \mathcal{G} = KClusterize(\tilde\xi_{{\mathcal{S'},t}}) $
+					\BlankLine
+					$ (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) = DataAssociation(\mathcal{G},OI_{s,t-1}) $
+				}
+			\end{algorithm}
+			
+			\column{.01\textwidth}
+			
+			\Huge
+			\vspace{2.15cm}
+			
+			\begin{center}
+				\textcolor{blue}{$ \Rightarrow $}
+			\end{center}
+			
+			\column{.44\textwidth}
+			
+			\centering
+			
+			\begin{tikzpicture}
+				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-1}
+				};
+				\node at (0,-3.5) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-2}
+				};
+			\end{tikzpicture}
+		}
+		
+		\only<2->
+		{
+			\begin{algorithm}[H]
+				\tiny
+				\KwIn{perceptions $ z_{s,t} $, local track numbers $ oi_{s,t-1} $, global track numbers $ OI_{s,t-1} $}
+				\BlankLine
+				\KwData{set of local particles $ \tilde{\xi}_{s,t} $, set of global particles $ \tilde{\xi}_{\mathcal{S'},t} $, sensor pose $ m_{s,t} $, local GMM set $ \mathcal{L} $, global GMM set $ \mathcal{G} $}
+				\BlankLine
+				\KwOut{global estimations $ x_{s,t} = (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) $}
+				\BlankLine
+				\Begin
+				{
+					$ \tilde{\xi}_{s,t} \sim \pi_t (x_{s,t} | x_{s,t-1},z_{s,t},m_{s,t}) $
+					\BlankLine
+					Re-sample by using the SIR principle\\
+					\BlankLine
+					$ \mathcal{L} = KClusterize(\tilde{\xi}_{s,t}) $
+					\BlankLine
+					$ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) = DataAssociation(\mathcal{L}, oi_{s,t-1}) $
+					\BlankLine
+					Communicate belief $ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $ to other agents
+				}
+				\BlankLine
+				\Begin
+				{
+					\textcolor{lightred}{Collect $ \mathcal{L}_{S'} $ from a subset $ \mathcal{S'} \subseteq \mathcal{S} $ of sensors within a $ \Delta t $}
+					\BlankLine
+					\textcolor{lightred}{$ \tilde{\xi}_{\mathcal{S'},t} \sim \tilde\pi = \sum_{s \in \mathcal{S'}} \boldsymbol\lambda_{s,t} \, \mathcal{N} (\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $}
+					\BlankLine
+					\textcolor{lightred}{Re-sample by using the SIR principle}\\
+					\BlankLine
+					\textcolor{lightred}{$ \mathcal{G} = KClusterize(\tilde\xi_{{\mathcal{S'},t}}) $}
+					\BlankLine
+					\textcolor{lightred}{$ (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) = DataAssociation(\mathcal{G},OI_{s,t-1}) $}
+				}
+			\end{algorithm}
+			
+			\column{.01\textwidth}
+			
+			\Huge
+			\vspace{2.15cm}
+			
+			\begin{center}
+				\textcolor{blue}{$ \Rightarrow $}
+			\end{center}
+			
+			\column{.44\textwidth}
+			
+			\centering
+			
+			\begin{tikzpicture}
+				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-1}
+				};
+				\node at (0,-3.5) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-3}
+				};
+			\end{tikzpicture}
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking}
+	\framesubtitle{Group Tracking}
 	
 	\begin{figure}
 		\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
@@ -64,310 +224,134 @@
 			\node at (4,0) [map] {\includegraphics[width=0.32\linewidth]{Figures/GroupTracking-b}};
 			\node at (8,0) [map] {\includegraphics[width=0.32\linewidth]{Figures/GroupTracking-c}};
 		\end{tikzpicture}
-		\caption{Group tracking. Two sailing boats are going to cross each other. Occlusions are handled considering
-				 the collapsing tracks to form a group, instead of tracking them separately.}
+		\caption{Group tracking. Two sailing boats are going to cross each other. Occlusions are handled
+				 considering the collapsing tracks to form a group, instead of tracking them
+				 separately.}
 	\end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Evaluating a Tracking Algorithm}
+	\frametitle{KClusterize}
+	\framesubtitle{Contributions}
 	
 	\Large
 	
-	\vspace{0.3cm}
+	\emph{KClusterize} has been designed aiming at fulfilling the following three requirements:
 	
-	The CLEAR MOT (Kasturi \emph{et al.}) metrics \emph{MOTA} and \emph{MOTP} are the de-facto
-	standard for evaluating a tracking method:
-	
-	\vspace{0.2cm}
-	
-	\large
-	
-	\begin{equation*}
-		MOTA = 1 - \frac{\sum_{t=1}^{N_{frames}} (c_m(m_t) + c_f(fp_t) + cs(ID\mbox{-}SWITCHES_t))}{\sum_{t=1}^{N_{frames}} N_G^{(t)}}
-	\end{equation*}
-	
-	\vspace{0.4cm}
-	
-	\begin{equation*}
-		MOTP = \frac{\sum_{i=1}^{N_{mapped}} \sum_{t=1}^{N_{frames}^{(t)}} \Big [ \frac{| G_i^{(t)} \cap D_i^{(t)} |}{| G_i^{(t)} \cup D_i^{(t)} |} \Big ] }{\sum_{t=1}^{N_{frames}} N_{mapped}^{(t)}}
-	\end{equation*}
+	\begin{enumerate}
+		\item \textbf{Number} of objects to be detected \textbf{cannot} be known a priori
+		\item \textbf{Low} computational load for real-time applications
+		\item \textbf{Gaussian distribution} for each cluster
+	\end{enumerate}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Application Field}
+	\frametitle{KClusterize}
+	\framesubtitle{Typical Clustering Scenario}
 	
-	\vspace{0.01cm}
+	\vspace{0.5cm}
 	
-	\begin{itemize}
-		\item Single-Agent, Multi-Object
-	\end{itemize}
-	
-	\vspace{-0.45cm}
-	
-	\begin{columns}[t]
-		\only<1->
-		{
-			\column{0.75\textwidth}
+	\begin{figure}[!t]
+		\begin{minipage}[l]{0.23\textwidth}
+			\vspace*{\fill}
+			\centering
+			\subfigure[Analysed situation.]
+			{
+				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+					\node at (0,0) [map]
+					{
+						\includegraphics[width=\linewidth]{Figures/PETS-2009-Frame-0722-zoomed}
+					};
+				\end{tikzpicture}
+			}
+		\end{minipage}
+		\hspace{0.1cm}
+		\begin{minipage}[c]{0.74\textwidth}
+			\subfigure[K-means with $ k = 2 $.]
+			{
+				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+					\node at (0,0) [map]
+					{
+						\includegraphics[width=0.47\linewidth]{Figures/Kmeans-2.png}
+					};
+				\end{tikzpicture}
+			}
+			\hspace{-3.8mm}
+			\subfigure[Hierarchical Clustering.]
+			{
+				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+					\node at (0,0) [map]
+					{
+						\includegraphics[width=0.47\linewidth]{Figures/HierarchicalClustering.png}
+					};
+				\end{tikzpicture}
+			}
 			
-			\begin{block}{Boat visual tracking}
-				automatic surveillance system in the maritime domain
-			\end{block}
-			
-			\column{0.2\textwidth}
-		}
-	\end{columns}
+			\subfigure[QT-Clustering.]
+			{
+				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+					\node at (0,0) [map]
+					{
+						\includegraphics[width=0.47\linewidth]{Figures/QT-Clustering.png}
+					};
+				\end{tikzpicture}
+			}
+			\hspace{-3.8mm}
+			\subfigure[KClusterize.]
+			{
+				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+					\node at (0,0) [map]
+					{
+						\includegraphics[width=0.47\linewidth]{Figures/KClusterize.png}
+					};
+				\end{tikzpicture}
+			}
+		\end{minipage}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KClusterize}
+	\framesubtitle{Clustering Speed}
 	
-	\centering
-	\vspace{0.3cm}
-	
-	\begin{center}
-		\begin{tikzpicture}
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=3.1cm]{Figures/Boat-1}};
-			\node at (4,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=3.1cm]{Figures/Boat-2}};
-			\node at (8,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=3.1cm]{Figures/Boat-3}};
+	\begin{figure}[t]
+		\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+			\node at (0,0) [map]
+			{
+				\includegraphics[width=0.88\linewidth]{Figures/ClusteringComparison}
+			};
 		\end{tikzpicture}
-	\end{center}
+	\end{figure}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Qualitative Evaluation on the Maritime Domain}
-	\framesubtitle{Blue water}
+	\frametitle{KClusterize}
+	\framesubtitle{Cluster Gaussian Distribution}
 	
-	\begin{center}
-		\href{run:../Scripts/boat-1.sh}
-		{
-			\begin{tikzpicture}
-				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
-				{
-					\includegraphics[width=0.65\linewidth]{Figures/Boat-2.png}
-				};
-			\end{tikzpicture}
-		}
-	\end{center}
-\end{frame}
-
-%\begin{frame}
-%	\frametitle{Qualitative Evaluation on the Maritime Domain}
-%	\framesubtitle{Honk-Kong port}
-%	
-%	\begin{center}
-%		\href{run:../Scripts/boat-2.sh}
-%		{
-%			\begin{tikzpicture}
-%				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
-%				{
-%					\includegraphics[width=0.65\linewidth]{Figures/Boat-3.png}
-%				};
-%			\end{tikzpicture}
-%		}
-%	\end{center}
-%\end{frame}
-
-\begin{frame}
-	\frametitle{Quantitative Evaluation on the Maritime Domain}
+	\vspace{0.3cm}
 	
-	\begin{table}[!t]
-		\renewcommand{\arraystretch}{1.3}
-		\caption{Tracking performance on the maritime domain. MOTA (larger the better)
-				 considers the number of missed detections, the number of false positives
-				 and the switches of identities. MOTP (larger the better) considers the
-				 precision of the detections.}
+	\setcounter{subfigure}{0}
+	
+	\begin{figure}[!t]
 		\centering
-		\vspace{0.2cm}
-		
-		\begin{tabular}{ccc}
-			\hline
-			\hline
-			\textbf{Video} & \textbf{MOTA} & \textbf{MOTP} \\
-			\hline
-			occlusions-1.avi & 0.815 & 0.613 \\
-			\hline
-			occlusions-2.avi & 0.910 & 0.554 \\
-			\hline
-			high-view.avi & 0.910 & 0.604 \\
-			\hline
-		\hline
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Application Field}
-	
-	\vspace{0.24cm}
-	
-	\begin{itemize}
-		\item Multi-Agent, Single-Object
-	\end{itemize}
-	
-	\vspace{-0.45cm}
-	
-	\begin{columns}[t]
-		\only<1->
+		\subfigure[Output of the algorithm on frame \#269.]
 		{
-			\column{0.75\textwidth}
-			
-			\begin{block}{Soccer robots}
-				used to solve the localization field symmetry problem
-			\end{block}
-			
-			\column{0.2\textwidth}
-		}
-	\end{columns}
-	
-	\centering
-	\vspace{0.3cm}
-	
-	\begin{tikzpicture}
-		\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
-		{
-			\includegraphics[scale=0.19]{Figures/Naos}
-		};
-	\end{tikzpicture}
-	
-\end{frame}
-
-\begin{frame}
-	\frametitle{Qualitative Evaluation on the Soccer Domain}
-	\framesubtitle{RoboCup Iran Open}
-	
-	\begin{center}
-		\href{run:../Scripts/nao.sh}
-		{
-			\begin{tikzpicture}
-				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
+				\node at (0,0) [map]
 				{
-					\includegraphics[width=0.65\linewidth]{Figures/Naos}
+					\includegraphics[width=0.48\linewidth]{Figures/KClusterize-Frame-0269-Output.png}
 				};
 			\end{tikzpicture}
 		}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Application Field}
-	
-	\vspace{-0.16cm}
-	
-	\begin{itemize}
-		\item Multi-Agent, Multi-Object
-	\end{itemize}
-	
-	\vspace{-0.45cm}
-	
-	\begin{columns}[t]
-		\only<1->
+		\hspace{-3.8mm}
+		\subfigure[A 2D visualization of frame \#269.]
 		{
-			\column{0.75\textwidth}
-			
-			\begin{block}{PETS 2009 data set}
-				tracking of individuals within a crowd
-			\end{block}
-			
-			\column{0.2\textwidth}
-		}
-	\end{columns}
-	
-	\centering
-	\vspace{0.3cm}
-	
-	\begin{center}
-		\begin{tikzpicture}
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.85cm]{Figures/PETS2009-1}};
-			\node at (4,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.85cm]{Figures/PETS2009-2}};
-			\node at (8,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.85cm]{Figures/PETS2009-3}};
-		\end{tikzpicture}
-	\end{center}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Quantitative Evaluation on the People Domain}
-	
-	\begin{table}[!t]
-		\renewcommand{\arraystretch}{1.3}
-		\caption{Tracking performance on the PETS 2009 data set. MOTA (larger the better)
-				 considers the number of missed detections, the number of false positives
-				 and the switches of identities. MOTP (larger the better) considers the
-				 precision of the detections.}
-		\centering
-		\vspace{0.2cm}
-		
-		\begin{tabular}{ccccc}
-			\hline
-			\hline
-			\textbf{Method} & \textbf{MOTA} & \textbf{MOTP} & \textbf{Type} & \textbf{Real-Time} \\
-			\hline
-			Leal-Taix\'{e} \emph{et al.} & 0.67 & 0.594 & OFFLINE & NO \\
-			\hline
-			Berclaz \emph{et al.} & 0.732 & 0.651 & OFFLINE & NO \\
-			\hline
-			Sharma \emph{et al.} & 0.675 & 0.582 & OFFLINE & NO \\
-			\hline
-			Breitenstein \emph{et al.} & 0.745 & 0.563 & ONLINE & NO \\
-			\hline
-			Yang \emph{et al.} & 0.759 & 0.538 & ONLINE & NO \\
-			\hline
-			PTracking & \textbf{0.814} & \textbf{0.652} & ONLINE & \textbf{YES} \\
-			\hline
-		\hline
-		\end{tabular}
-	\end{table}
-\end{frame}
-
-\begin{frame}
-	\frametitle{Application Field}
-	
-	\vspace{0.2cm}
-	
-	\begin{itemize}
-		\item Multi-Agent, Multi-Object
-	\end{itemize}
-	
-	\vspace{-0.45cm}
-	
-	\begin{columns}[t]
-		\only<1->
-		{
-			\column{0.75\textwidth}
-			
-			\begin{block}{Inferring target goal}
-				intention-inference for dynamic environments with multiple interactively navigating agents
-			\end{block}
-			
-			\column{0.2\textwidth}
-		}
-	\end{columns}
-	
-	\centering
-	
-	\begin{center}
-		\begin{tikzpicture}
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.9cm]{Figures/Kinect-1}};
-			\node at (4,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.9cm]{Figures/Kinect-2}};
-			\node at (8,0) [draw=black,ultra thick,inner sep=0pt]  {\includegraphics[height=2.9cm]{Figures/Kinect-3}};
-		\end{tikzpicture}
-	\end{center}
-	
-	\vspace{-0.3cm}
-	
-	\small
-	This work has been realized during my visiting period at the University of Edinburgh, under the supervision of Prof. \emph{Subramanian Ramamoorthy}.
-\end{frame}
-
-\begin{frame}
-	\frametitle{Qualitative Evaluation on the Inference Domain}
-	\framesubtitle{InSpace - University of Edinburgh}
-	
-	\begin{center}
-		\href{run:../Scripts/inspace.sh}
-		{
-			\begin{tikzpicture}
-				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+				\node at (0,0) [map]
 				{
-					\includegraphics[width=0.65\linewidth]{Figures/Kinect-2.png}
+					\includegraphics[width=0.48\linewidth]{Figures/KClusterize-Frame-0269-PlaneView.png}
 				};
 			\end{tikzpicture}
 		}
-	\end{center}
+	\end{figure}
 \end{frame}
