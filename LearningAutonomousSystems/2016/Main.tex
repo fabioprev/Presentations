@@ -1,0 +1,55 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{movie15}
+\usepackage{rotating}
+\usepackage{subfigure}
+
+\definecolor{darkgreen}{RGB}{0,180,0}
+\definecolor{lightred}{RGB}{210,0,0}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Predicting Future Agent Motions through a Distributed Multi-Clustered PF]{\Large Predicting Future Agent Motions through a Distributed Multi- Clustered Particle Filtering}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\Large\textbf{Fabio Previtali}}
+
+\date[May 9, 2016]{Learning in Autonomous Systems\\A.Y. 2015/2016\\Rome, Italy}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\titlepage
+\end{frame}
+
+\input{Introduction}
+\input{Handson}
+\input{RelatedWork-Tracking}
+\input{PTracking}
+\input{Experiments-Tracking}
+\input{RelatedWork-ActivityForecasting}
+\input{ActivityForecasting}
+\input{Experiments-ActivityForecasting}
+\input{Conclusions}
+
+\tiny
+\bibliographystyle{plain}
+\bibliography{Main}
+
+\end{document}
