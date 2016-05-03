@@ -55,11 +55,38 @@
 		
 		\begin{itemize}
 			\item libopencv-dev
+			\item gnuplot
+			\item gnuplot-x11
 			\item libopenni2-dev (optional)
-			\item gnuplot (optional)
-			\item gnuplot-x11 (optional)
+			\item Imbs (see next slide)
 		\end{itemize}
 	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Hands-on PTracking}
+	\framesubtitle{Getting, Building and Installing Imbs}
+	
+	\Large
+	
+	\vspace{0.4cm}
+	
+	\emph{Imbs} is currently available at the following repo:
+	\vspace{-0.2cm}
+	\begin{center}
+		\url{https://github.com/fabioprev/Imbs.git}
+	\end{center}
+	
+	\vspace{-0.2cm}
+	
+	\begin{itemize}
+		\item \texttt{cd <Imbs-root-directory>}
+		\item \texttt{mkdir build}
+		\item \texttt{cd build}
+		\item \texttt{cmake ../src}
+		\item \texttt{make -j<number-of-cores+1>}
+		\item \texttt{sudo make install}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -123,7 +150,13 @@
 	
 	\Large
 	
+	Two examples are provided along the \emph{PTracking} library:
 	
+	\begin{itemize}
+		\item \texttt{cd <PTracking-root-directory>/script}
+		\item \texttt{./run\_Edinburgh-Atrium.sh} or
+		\item \texttt{./run\_PETS-2009.sh}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}
