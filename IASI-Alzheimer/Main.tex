@@ -15,73 +15,57 @@
 
 \usepackage[english]{babel}
 \usepackage[latin1]{inputenc}
-\usepackage{dsfont}
-\usepackage{setspace}
-\usepackage[algoruled]{algorithm2e}
-\usepackage{algorithmic,algorithm2e,float}
-\usepackage{rotating}
+\usepackage{subfigure}
+\usepackage{tikz}
 
-\SetAlCapFnt{\scriptsize}
-\SetAlCapNameFnt{\scriptsize}
-
-\definecolor{darkgreen}{RGB}{0,180,0}
-\definecolor{lightred}{RGB}{210,0,0}
-
-\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
-
-\title[IRL-based Prediction of Goals for Dynamic Environments]{\huge IRL-based Prediction of Goals for Dynamic Environments}
+\title[Alzheimer Entity Classification Combining ORB and Machine Learning]{\huge Alzheimer Entity Classification Combining ORB and Machine Learning}
 
 \subtitle{}
 
-\author[Fabio Previtali]{\vspace{0.1cm} \\ \large Fabio Previtali \\ Alejandro Bordallo Mic\'o \\ Subramanian Ramamoorthy}
+\author[Fabio Previtali]{\vspace{0.1cm} \\ \large Emanuel Weitschek \\ Giovanni Felici \\ Paola Bertolazzi}
 
-\date[May 26th 2015]{\small ICRA Workshop on Machine Learning for Social Robotics\\Seattle, USA}
+\date[May 13th 2016]{}
 
 \begin{document}
 
 \begin{frame}[plain]
 	\begin{center}
-		\huge
+		\LARGE
 		
 		\vspace{0.5cm}
 		
-		\textbf{IRL-based Prediction of Goals \\ for Dynamic Environments}
+		\textbf{Alzheimer Entity Classification Combining ORB and Machine Learning}
 		
 		\vspace{0.7cm}
 		
 		\large
 		
-		\emph{F. Previtali}, \emph{A. Bordallo Mic\'o} and \emph{S.
-		Ramamoorthy}
+		\emph{F. Previtali}, \emph{E. Weitschek}, \emph{G. Felici} and \emph{P. Bertolazzi}
 		
-		\vspace{1.5cm}
+		\vspace{0.2cm}
 		
 		\normalsize
 		
-		Workshop on Machine Learning for Social Robotics \\
-		at ICRA-15 in Seattle, Washington \\
-		May 26th 2015
+		May, 13th 2016
 		
-		\vspace{1.5cm}
+		\vspace{0.5cm}
 		
-		\begin{tikzpicture}
-			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[width=0.45\linewidth]{ThemeFigs/InformaticsUni}
-			};
-			\node at (6,0) [draw=white,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[width=0.45\linewidth]{ThemeFigs/IPAB}
-			};
-		\end{tikzpicture}
+		\begin{center}
+			\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
+				\node at (0,0) [map]
+				{
+					\includegraphics[height=3cm]{Figures/Brain}
+				};
+			\end{tikzpicture}
+		\end{center}
+		
+		\vspace{0.5cm}
+		
+		\textbf{Istituto di Analisi dei Sistemi ed Informatica ``Antonio Ruberti''}
 	\end{center}
 \end{frame}
 
-\logo{\includegraphics[height=1cm]{ThemeFigs/LogoEdinburgh}\vspace{200pt}}
-
 \input{Introduction}
 \input{Method}
-\input{Experiments}
-\input{Conclusions}
 
 \end{document}
