@@ -35,33 +35,22 @@
 	\frametitle{Experimental Evaluation}
 	\framesubtitle{Multi-Sensor, Single-Object}
 	
-	\large
-	
-	\vspace{-0.3cm}
-	
-	\begin{columns}[t]
-		\only<1->
-		{
-			\column{0.8\textwidth}
-			
-			\begin{block}{Soccer Robots}
-				used to solve the localisation field symmetry problem
-			\end{block}
-			
-			\column{0.15\textwidth}
-		}
-	\end{columns}
-	
-	\vspace{0.15cm}
+	\vspace{-0.1cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (-4.2,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[scale=0.2]{Figures/Nao}
+				\includegraphics[scale=0.125]{Figures/Challenge}
+			};
+			\node at (2,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[scale=0.15]{Figures/LocalisationResults}
 			};
 		\end{tikzpicture}
 	\end{center}
+	
+	\vspace{0.545cm}
 	
 	\tiny
 	
@@ -312,6 +301,57 @@
 	\frametitle{Experimental Evaluation}
 	\framesubtitle{Multi-Sensor, Multi-Object}
 	
+%	\vspace{-0.2cm}
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\node at (-2.25,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.4cm]{Figures/Map-1}
+			};
+			\node at (2.25,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.4cm]{Figures/Map-2}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\small
+	
+	\vspace{-0.3cm}
+	
+	\begin{table}[!t]
+		\centering
+		\def\arraystretch{1.15}
+		\begin{tabular}{ccccc}
+			\cline{1-5}
+			\multicolumn{1}{l}{} & \multicolumn{4}{c}{\textbf{\begin{tabular}[c]
+			{@{}c@{}}Tracking Performance (MOTA,MOTP)\end{tabular}}} \\ \hline
+			\multicolumn{1}{c}{\textbf{\#}} & \textbf{Setting 1} & \textbf{Setting 2} &
+			\textbf{Setting 3} & \textbf{Setting 4} \\
+			
+			\multicolumn{1}{c}{1} & (0.63,0.45) & (0.67,0.49) & (0.75,0.51) & (0.94,0.75) \\
+			\multicolumn{1}{c}{2} & (0.59,0.42) & (0.65,0.45) & (0.73,0.49) & (0.92,0.74) \\
+			\multicolumn{1}{c}{3} & (0.64,0.41) & (0.69,0.48) & (0.70,0.47) & (0.95,0.77) \\
+			\multicolumn{1}{c}{4} & (0.62,0.45) & (0.62,0.40) & (0.74,0.50) & (0.92,0.75) \\
+			\multicolumn{1}{c}{5} & (0.57,0.39) & (0.64,0.44) & (0.70,0.48) & (0.94,0.77) \\
+			\hline
+		\end{tabular}
+	\end{table}
+
+	\tiny
+	
+	\textbf{PTracking: Distributed Multi-Agent Multi-Object Tracking through Multi-Clustered Particle
+	Filtering} \\
+	F. Previtali, L. Iocchi \\
+	\emph{IEEE International Conference on Multisensor Fusion and Integration for Intelligent Systems,
+	2015} \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Experimental Evaluation}
+	\framesubtitle{Multi-Sensor, Multi-Object}
+	
 	\vspace{-0.2cm}
 	
 	\begin{center}
@@ -363,7 +403,7 @@
 		\hspace{5.55cm}
 		A. Pennisi, F. Previtali, F. Ficarola, D. D. Bloisi, L. Iocchi, A. Vitaletti \\
 		\hspace{5.55cm}
-		\emph{Studies in Computational Intelligence} \\
+		\emph{Studies in Computational Intelligence, 2015} \\
 	\end{tabbing}
 \end{frame}
 
