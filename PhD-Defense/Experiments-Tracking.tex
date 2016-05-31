@@ -50,7 +50,7 @@
 		\end{tikzpicture}
 	\end{center}
 	
-	\vspace{0.545cm}
+	\vspace{0.512cm}
 	
 	\tiny
 	
@@ -301,44 +301,57 @@
 	\frametitle{Experimental Evaluation}
 	\framesubtitle{Multi-Sensor, Multi-Object}
 	
-%	\vspace{-0.2cm}
+	\vspace{0.2cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
-			\node at (-2.25,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (-2.5,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[height=2.4cm]{Figures/Map-1}
+				\includegraphics[height=2.7cm]{Figures/Map-1}
 			};
-			\node at (2.25,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (2.5,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[height=2.4cm]{Figures/Map-2}
+				\includegraphics[height=2.7cm]{Figures/Map-2}
 			};
 		\end{tikzpicture}
 	\end{center}
 	
-	\small
+	\tiny
 	
-	\vspace{-0.3cm}
+	\vspace{-0.15cm}
 	
 	\begin{table}[!t]
 		\centering
 		\def\arraystretch{1.15}
-		\begin{tabular}{ccccc}
-			\cline{1-5}
-			\multicolumn{1}{l}{} & \multicolumn{4}{c}{\textbf{\begin{tabular}[c]
-			{@{}c@{}}Tracking Performance (MOTA,MOTP)\end{tabular}}} \\ \hline
-			\multicolumn{1}{c}{\textbf{\#}} & \textbf{Setting 1} & \textbf{Setting 2} &
+		\setlength{\tabcolsep}{0.15cm}
+		\begin{tabular}{ccccc|ccccc}
+			\cline{1-9}
+			\multicolumn{9}{c}{\textbf{\begin{tabular}[c]
+			{@{}c@{}}Tracking Performance (MOTA,MOTP)\end{tabular}}} \\ \cline{1-9}
+			\multicolumn{1}{l}{} & \multicolumn{4}{c|}{\textbf{\begin{tabular}[c]
+			{@{}c@{}}DIAG\end{tabular}}} &
+			\multicolumn{4}{c}{\textbf{\begin{tabular}[c]
+			{@{}c@{}}Peccioli\end{tabular}}} \\ \hline
+			\multicolumn{1}{c|}{\textbf{\#}} & \textbf{Setting 1} & \textbf{Setting 2} &
+			\textbf{Setting 3} & \textbf{Setting 4} & \textbf{Setting 1} & \textbf{Setting 2} &
 			\textbf{Setting 3} & \textbf{Setting 4} \\
 			
-			\multicolumn{1}{c}{1} & (0.63,0.45) & (0.67,0.49) & (0.75,0.51) & (0.94,0.75) \\
-			\multicolumn{1}{c}{2} & (0.59,0.42) & (0.65,0.45) & (0.73,0.49) & (0.92,0.74) \\
-			\multicolumn{1}{c}{3} & (0.64,0.41) & (0.69,0.48) & (0.70,0.47) & (0.95,0.77) \\
-			\multicolumn{1}{c}{4} & (0.62,0.45) & (0.62,0.40) & (0.74,0.50) & (0.92,0.75) \\
-			\multicolumn{1}{c}{5} & (0.57,0.39) & (0.64,0.44) & (0.70,0.48) & (0.94,0.77) \\
+			\multicolumn{1}{c|}{1} & (0.63,0.45) & (0.67,0.49) & (0.75,0.51) & (0.94,0.75)
+								   & (0.67,0.42) & (0.71,0.49) & (0.78,0.58) & (0.93,0.79) \\
+			\multicolumn{1}{c|}{2} & (0.59,0.42) & (0.65,0.45) & (0.73,0.49) & (0.92,0.74)
+								   & (0.64,0.47) & (0.73,0.51) & (0.72,0.52) & (0.96,0.79) \\
+			\multicolumn{1}{c|}{3} & (0.64,0.41) & (0.69,0.48) & (0.70,0.47) & (0.95,0.77)
+								   & (0.64,0.47) & (0.73,0.51) & (0.72,0.52) & (0.96,0.79) \\
+			\multicolumn{1}{c|}{4} & (0.62,0.45) & (0.62,0.40) & (0.74,0.50) & (0.92,0.75)
+								   & (0.66,0.44) & (0.68,0.43) & (0.75,0.53) & (0.93,0.77) \\
+			\multicolumn{1}{c|}{5} & (0.57,0.39) & (0.64,0.44) & (0.70,0.48) & (0.94,0.77)
+								   & (0.60,0.41) & (0.65,0.45) & (0.71,0.51) & (0.97,0.81) \\
 			\hline
 		\end{tabular}
 	\end{table}
-
+	
+	\vspace{0.455cm}
+	
 	\tiny
 	
 	\textbf{PTracking: Distributed Multi-Agent Multi-Object Tracking through Multi-Clustered Particle
@@ -352,37 +365,135 @@
 	\frametitle{Experimental Evaluation}
 	\framesubtitle{Multi-Sensor, Multi-Object}
 	
-	\vspace{-0.2cm}
+	\vspace{0.1cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
-			\node at (-2.48,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[height=2.6cm]{Figures/Map-1}
+				\includegraphics[height=2.9cm]{Figures/Boat-1}
 			};
-			\node at (2.48,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (3.7,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[height=2.6cm]{Figures/Map-2}
+				\includegraphics[height=2.9cm]{Figures/Boat-2}
+			};
+			\node at (7.45,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.9cm]{Figures/Boat-3}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{-0.2cm}
+	
+	\footnotesize
+	
+	\begin{table}
+		\centering
+		\def\arraystretch{1.15}
+		\setlength{\tabcolsep}{0.15cm}
+		\begin{tabular}{cccc}
+			\cline{1-4}
+			\multicolumn{4}{c}{\textbf{PTracking}} \\ \cline{1-4}
+			\textbf{Video} & \textbf{Multi-Source} & \textbf{MOTA} & \textbf{MOTP} \\
+			\hline
+			occlusions-1 (left) & NO & 0.815 & 0.613 \\
+			\hline
+			occlusions-1 (left) & YES & 0.975 & 0.871 \\
+			\hline
+			occlusions-2 (center) & NO & 0.910 & 0.554 \\
+			\hline
+			high-view (right) & NO & 0.910 & 0.604 \\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+	\vspace{-0.04cm}
+	
+	\tiny
+	
+	\textbf{Enhancing Automatic Maritime Surveillance Systems with Visual Information} \\
+	D. D. Bloisi, F. Previtali, A. Pennisi, D. Nardi, M. Fiorini \\
+	\emph{IEEE Transaction on Intelligent Transportation Systems} [second revision] \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Qualitative Evaluation}
+	\framesubtitle{Maritime Domain - Multiple Source Data Fusion}
+	
+	\begin{figure}[!h]
+		\centering
+		\includemovie[inline=false,text=
+		{
+			\begin{tikzpicture}
+				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=0.65\linewidth]{Figures/Boat-1}
+				};
+			\end{tikzpicture}
+		}]{}{}{../Videos/1-Boat/PTracking-DataFusion.avi}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Experimental Evaluation}
+	\framesubtitle{Multi-Sensor, Multi-Object}
+	
+	\vspace{0.2cm}
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\node at (-2.04,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.5cm]{Figures/PETS2009-7}
+			};
+			\node at (2.04,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.5cm]{Figures/IssiaSoccer-Camera1}
 			};
 		\end{tikzpicture}
 	\end{center}
 	
 	\tiny
 	
-	\vspace{-0.75cm}
+	\vspace{-0.3cm}
+
+	\begin{table}[!t]
+		\renewcommand{\arraystretch}{1.25}
+		\setlength{\tabcolsep}{0.14cm}
+		\centering
+		\begin{tabular}{ccccc|cccc}
+			\cline{1-9}
+			\multicolumn{5}{c|}{\textbf{PETS 2009}} & \multicolumn{4}{c}{\textbf{Issia Soccer}} \\
+			\hline
+			\textbf{Method} & \textbf{MOTA} & \textbf{MOTP} & \textbf{Type} & \textbf{Real-Time} &
+			\textbf{Method} & \textbf{Camera} & \textbf{MOTA} & \textbf{MOTP} \\
+			Leal-Taix\'{e} \cite{Leal11} & 0.67 & 0.534 & OFFLINE & NO & PTracking & 1 & 0.723 & 0.612
+			\\
+			Berclaz \cite{Berclaz11} & 0.732 & 0.603 & OFFLINE & NO & PTracking & 1, 2 & 0.789 & 0.638
+			\\
+			Henriques \cite{Henriques11} & 0.833 & 0.711 & OFFLINE & NO & PTracking & 1, 2, 3 & 0.817 &
+			0.651 \\
+			Breitenstein \cite{Breitenstein11} & 0.745 & 0.563 & ONLINE & NO & PTracking & 1, 2, 3, 4 &
+			0.894 & 0.706 \\
+			Yang \cite{Yang09} & 0.759 & 0.538 & ONLINE & NO \\
+			Bae \cite{Bae14} & 0.830 & 0.696 & ONLINE & \textbf{YES} \\
+			PTracking & \textbf{0.874} & \textbf{0.722} & ONLINE & \textbf{YES (30.2 FPS)} \\
+			PTracking$^*$ & \textbf{0.882} & \textbf{0.717} & ONLINE & NO (11.8 FPS) \\
+			\hline
+		\end{tabular}
+	\end{table}
 	
-	\begin{tabbing}
-		\hspace{1.05cm}
-		\textbf{PTracking: Distributed Multi-Agent Multi-Object Tracking through Multi-Clustered
-				Particle Filtering} \\
-		\hspace{1.05cm}
-		F. Previtali, L. Iocchi \\
-		\hspace{1.05cm}
-		\emph{IEEE International Conference on Multisensor Fusion and Integration for Intelligent
-		Systems, 2015} \\
-	\end{tabbing}
+	\tiny
 	
-	\vspace{-0.8cm}
+	\textbf{A Distributed Approach for Real-Time Multi-Camera Multi-Object Tracking} \\
+	F. Previtali, D. D. Bloisi, L. Iocchi \\
+	\emph{Journal on Machine Vision and Applications} [submitted] \\
+\end{frame}
+
+\begin{frame}
+	\frametitle{Experimental Evaluation}
+	\framesubtitle{Multi-Sensor, Multi-Object}
 	
 	\begin{center}
 		\hspace{-6.85cm}
@@ -407,95 +518,6 @@
 	\end{tabbing}
 \end{frame}
 
-\begin{frame}
-	\frametitle{Experimental Evaluation}
-	\framesubtitle{Multi-Sensor, Multi-Object}
-	
-	\vspace{-0.2cm}
-	
-	\begin{center}
-		\begin{tikzpicture}
-			\node at (-2.2,0) [draw=black,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[height=2.6cm]{Figures/PETS2009-7}
-			};
-			\node at (2.2,0) [draw=black,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[height=2.6cm]{Figures/IssiaSoccer-Camera1}
-			};
-		\end{tikzpicture}
-	\end{center}
-	
-	\tiny
-	
-	\vspace{-0.75cm}
-	
-	\begin{tabbing}
-		\hspace{2.26cm}
-		\textbf{A Distributed Approach for Real-Time Multi-Camera Multi-Object Tracking} \\
-		\hspace{2.26cm}
-		F. Previtali, D. D. Bloisi, L. Iocchi \\
-		\hspace{2.26cm}
-		\emph{Journal on Computer Vision and Image Understanding} [second revision] \\
-	\end{tabbing}
-	
-	\vspace{-0.8cm}
-	
-	\begin{center}
-		\hspace{-8cm}
-		\begin{tikzpicture}
-
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[height=2.6cm]{Figures/Boat-3}
-			};
-		\end{tikzpicture}
-	\end{center}
-	
-	\vspace{-2.5cm}
-	
-	\begin{tabbing}
-		\hspace{3.8cm}
-		\textbf{Enhancing Automatic Maritime Surveillance Systems with Visual Information} \\
-		\hspace{3.8cm}
-		D. D. Bloisi, F. Previtali, A. Pennisi, D. Nardi, M. Fiorini \\
-		\hspace{3.8cm}
-		\emph{IEEE Transaction on Intelligent Transportation Systems} [second revision] \\
-	\end{tabbing}
-\end{frame}
-
-%\begin{frame}
-%	\frametitle{Quantitative Evaluation}
-%	\framesubtitle{Maritime Domain}
-%	
-%	\large
-%	
-%	\begin{table}[!t]
-%		\renewcommand{\arraystretch}{1.3}
-%		\caption{\large Tracking performance on the maritime domain. MOTA (higher the better) considers
-%				 the number of missed detections, the number of false positives and the switches of
-%				 identities. MOTP (higher the better) considers the precision of the detections.}
-%		\centering
-%		\vspace{0.2cm}
-%		
-%		\begin{tabular}{cccc}
-%			\hline
-%			\hline
-%			\textbf{Video} & \textbf{Multi-Source} & \textbf{MOTA} & \textbf{MOTP} \\
-%			\hline
-%			occlusions-1.avi & NO & 0.815 & 0.613 \\
-%			\hline
-%			occlusions-1.avi & YES & 0.975 & 0.871 \\
-%			\hline
-%			occlusions-2.avi & NO & 0.910 & 0.554 \\
-%			\hline
-%			high-view.avi & NO & 0.910 & 0.604 \\
-%			\hline
-%		\hline
-%		\end{tabular}
-%	\end{table}
-%\end{frame}
-%
 %\begin{frame}
 %	\frametitle{Qualitative Evaluation}
 %	\framesubtitle{Maritime Domain - Blue Water}
@@ -513,25 +535,7 @@
 %		}]{}{}{../Videos/1-Boat/PTracking-Wester_LLTV_VELA.avi}
 %	\end{figure}
 %\end{frame}
-
-\begin{frame}
-	\frametitle{Qualitative Evaluation}
-	\framesubtitle{Maritime Domain - Multiple Source Data Fusion}
-	
-	\begin{figure}[!h]
-		\centering
-		\includemovie[inline=false,text=
-		{
-			\begin{tikzpicture}
-				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
-				{
-					\includegraphics[width=0.65\linewidth]{Figures/Boat-1}
-				};
-			\end{tikzpicture}
-		}]{}{}{../Videos/1-Boat/PTracking-DataFusion.avi}
-	\end{figure}
-\end{frame}
-
+%
 %\begin{frame}
 %	\frametitle{Experimental Evaluation}
 %	\framesubtitle{Multi-Sensor, Multi-Object}
