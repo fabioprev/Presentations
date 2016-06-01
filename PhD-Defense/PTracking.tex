@@ -1,41 +1,5 @@
 \section{PTracking Algorithm}
 
-%\begin{frame}
-%	\frametitle{PTracking}
-%	\framesubtitle{Distributed Particle Filtering for Multi-Sensor Multiple Object Tracking}
-%	
-%	\LARGE
-%	
-%	\begin{block}{Idea}
-%		Achieving \textbf{high} precision and robustness, as a global method does, while trying to keep
-%		a \textbf{low} computational load in order to obtain \textbf{real-time} performance, as
-%		recursive methods do
-%	\end{block}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{PTracking}
-%	\framesubtitle{Contributions}
-%	
-%	\Large
-%	
-%	\vspace{0.2cm}
-%	
-%	We propose a novel technique based on \emph{Distributed Particle Filtering}. The key contributions
-%	are:
-%	
-%	\vspace{0.15cm}
-%	
-%	\begin{enumerate}
-%		\item \textbf{Real-time} multiple object tracking method
-%		\item Novel clustering method that \textbf{keeps} track of multiple objects whose number is
-%			  \textbf{not known} a priori, ensuring a \textbf{limited} Gaussian distribution in the
-%			  particle space
-%		\item \textbf{Asynchronous} algorithm to improve robustness with respect to communication
-%			  failures and dead nodes
-%	\end{enumerate}
-%\end{frame}
-
 \begin{frame}
 	\frametitle{PTracking}
 	\framesubtitle{General Schema}
@@ -75,7 +39,7 @@
 	
 	\tiny
 	
-	\cite{Bloisi12} D. D. Bloisi \emph{et al.},  ``Independent Multimodal Background Subtraction'',
+	\cite{Bloisi12} D. D. Bloisi \emph{et al.},  ``Independent multimodal background subtraction'',
 	CompIMAGE, 2012
 \end{frame}
 
@@ -215,144 +179,26 @@
 	\end{columns}
 \end{frame}
 
-%\begin{frame}
-%	\frametitle{PTracking}
-%	\framesubtitle{Group Tracking}
-%	
-%	\begin{figure}
-%		\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
-%			\node at (0,0) [map] {\includegraphics[width=0.32\linewidth]{Figures/GroupTracking-a}};
-%			\node at (4,0) [map] {\includegraphics[width=0.32\linewidth]{Figures/GroupTracking-b}};
-%			\node at (8,0) [map] {\includegraphics[width=0.32\linewidth]{Figures/GroupTracking-c}};
-%		\end{tikzpicture}
-%		\caption{Group tracking. Two sailing boats are going to cross each other. Occlusions are handled
-%				 considering the collapsing tracks to form a group, instead of tracking them
-%				 separately.}
-%	\end{figure}
-%\end{frame}
-%
-%\begin{frame}
-%	\frametitle{KClusterize}
-%	\framesubtitle{Contributions}
-%	
-%	\Large
-%	
-%	\emph{KClusterize} has been designed aiming at fulfilling the following three requirements:
-%	
-%	\begin{enumerate}
-%		\item \textbf{Number} of objects to be detected \textbf{cannot} be known a priori
-%		\item \textbf{Low} computational load for real-time applications
-%		\item \textbf{Gaussian distribution} for each cluster
-%	\end{enumerate}
-%\end{frame}
-
 \begin{frame}
 	\frametitle{KClusterize}
 	\framesubtitle{Typical Clustering Scenario}
 	
-	\vspace{0.5cm}
+	\vspace{-0.1cm}
 	
-	\begin{figure}[!t]
-		\begin{minipage}[l]{0.23\textwidth}
-			\vspace*{\fill}
-			\centering
-			\subfigure[Analysed situation.]
-			{
-				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-					\node at (0,0) [map]
-					{
-						\includegraphics[width=\linewidth]{Figures/PETS-2009-Frame-0722-zoomed}
-					};
-				\end{tikzpicture}
-			}
-		\end{minipage}
-		\hspace{0.1cm}
-		\begin{minipage}[c]{0.74\textwidth}
-			\subfigure[K-means with $ k = 2 $.]
-			{
-				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-					\node at (0,0) [map]
-					{
-						\includegraphics[width=0.47\linewidth]{Figures/Kmeans-2.png}
-					};
-				\end{tikzpicture}
-			}
-			\hspace{-3.8mm}
-			\subfigure[Hierarchical Clustering.]
-			{
-				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-					\node at (0,0) [map]
-					{
-						\includegraphics[width=0.47\linewidth]{Figures/HierarchicalClustering.png}
-					};
-				\end{tikzpicture}
-			}
-			
-			\subfigure[QT-Clustering.]
-			{
-				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-					\node at (0,0) [map]
-					{
-						\includegraphics[width=0.47\linewidth]{Figures/QT-Clustering.png}
-					};
-				\end{tikzpicture}
-			}
-			\hspace{-3.8mm}
-			\subfigure[KClusterize.]
-			{
-				\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-					\node at (0,0) [map]
-					{
-						\includegraphics[width=0.47\linewidth]{Figures/KClusterize.png}
-					};
-				\end{tikzpicture}
-			}
-		\end{minipage}
-	\end{figure}
-\end{frame}
-
-\begin{frame}
-	\frametitle{KClusterize}
-	\framesubtitle{Clustering Speed}
-	
-	\begin{figure}[t]
+	\begin{center}
 		\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-			\node at (0,0) [map]
+			\node at (0,-0.25) [map]
 			{
-				\includegraphics[width=0.88\linewidth]{Figures/ClusteringComparison}
+				\includegraphics[width=0.3\linewidth]{Figures/PETS-2009-Frame-0722-zoomed}
+			};
+			\node at (5,1.5) [map]
+			{
+				\includegraphics[width=0.44\linewidth]{Figures/KClusterize}
+			};
+			\node at (5,-2) [map]
+			{
+				\includegraphics[width=0.44\linewidth]{Figures/ClusteringComparison}
 			};
 		\end{tikzpicture}
-	\end{figure}
+	\end{center}
 \end{frame}
-
-%\begin{frame}
-%	\frametitle{KClusterize}
-%	\framesubtitle{Cluster Gaussian Distribution}
-%	
-%	\vspace{0.3cm}
-%	
-%	\setcounter{subfigure}{0}
-%	
-%	\begin{figure}[!t]
-%		\centering
-%		\subfigure[Output of the algorithm on frame \#269.]
-%		{
-%			\begin{tikzpicture}[map/.style={draw=black,ultra thick,inner sep=0pt}]
-%				\node at (0,0) [map]
-%				{
-%					\includegraphics[width=0.48\linewidth]{Figures/KClusterize-Frame-0269-Output.png}
-%				};
-%			\end{tikzpicture}
-%		}
-%		\hspace{-3.8mm}
-%		\subfigure[A 2D visualization of frame \#269.]
-%		{
-%			\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
-%				\node at (0,0) [map]
-%				{
-%					\includegraphics[width=0.48\linewidth]{Figures/KClusterize-Frame-0269-PlaneView.png}
-%				};
-%			\end{tikzpicture}
-%		}
-%	\end{figure}
-%\end{frame}

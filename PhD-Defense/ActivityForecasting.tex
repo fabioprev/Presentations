@@ -47,28 +47,9 @@
 	
 	\tiny
 	
-	\cite{Ng00} A. Y. Ng \emph{et al.},  ``Algorithms for inverse reinforcement learning'', ICML, 2000
+	\cite{Ng00} S. Russell \emph{et al.},  ``Algorithms for inverse reinforcement learning'', ICML,
+	2000
 \end{frame}
-
-%\begin{frame}
-%	\frametitle{Predicting Future Agent Motions}
-%	\framesubtitle{Contributions}
-%	
-%	\Large
-%	
-%	\vspace{0.4cm}
-%	
-%	We propose an integrated framework, which relies on \emph{PTracking}, for estimating future movement
-%	intentions of goal-oriented agents, that:
-%	
-%	\vspace{0.15cm}
-%	
-%	\begin{enumerate}
-%		\item \textbf{Does not} rely on semantic scene labelling
-%		\item \textbf{Incrementally} updates the IRL model over time
-%		\item Makes use of \textbf{non-uniform grids} for representing the state of the environment
-%	\end{enumerate}
-%\end{frame}
 
 \begin{frame}
 	\frametitle{Predicting Future Agent Motions}
@@ -200,7 +181,7 @@
 	\frametitle{Predicting Future Agent Motions}
 	\framesubtitle{Policy Generation}
 	
-	\vspace{0.2cm}
+	\vspace{0.4cm}
 	
 	\begin{center}
 		\begin{tikzpicture}
@@ -219,24 +200,12 @@
 		\end{tikzpicture}
 	\end{center}
 	
-	Goals can be \emph{statically} chosen or \emph{generated} by analysing tracking data
+	\vspace{-0.1cm}
+	
+	\begin{center}
+		Goals can be \emph{statically} chosen or \emph{generated} by analysing tracking data
+	\end{center}
 \end{frame}
-
-%\begin{frame}
-%	\frametitle{Predicting Future Agent Motions}
-%	\framesubtitle{Observed Trajectory Extraction}
-%	
-%	\LARGE
-%	
-%	\vspace{0.4cm}
-%	
-%	We gather object estimates from \emph{PTracking} considering an arbitrary temporal window. \\
-%	
-%	\vspace{0.4cm}
-%	
-%	Having acquired a set of trajectories $ \mathcal{U} $, we \textbf{ground} each trajectory $ u \in
-%	\mathcal{U} $ in every policy $ \pi_s^G $. \\
-%\end{frame}
 
 \begin{frame}
 	\frametitle{Predicting Future Agent Motions}
@@ -287,25 +256,3 @@
 		\end{tikzpicture}
 	\end{center}
 \end{frame}
-
-%\begin{frame}
-%	\frametitle{Predicting Future Agent Motions}
-%	\framesubtitle{Anomaly Detection}
-%	
-%	\LARGE
-%	
-%	\vspace{0.5cm}
-%	
-%	It could happen that a trajectory $ u \in \mathcal{U} $ does not match any model:
-%	\begin{itemize}
-%		\item A trajectory fragment $ u $ is \textbf{anomalous} and refers to a \emph{suspicious
-%			  activity pattern}
-%		\item Environment has changed leading to new types of motion
-%			  \vspace{-0.25cm}
-%			  \begin{tabbing}
-%				  \hspace{0.3cm}
-%				  \large
-%				  $ \leadsto $ \emph{can be recognised by analysing the foreground model}
-%			  \end{tabbing}
-%	\end{itemize}
-%\end{frame}

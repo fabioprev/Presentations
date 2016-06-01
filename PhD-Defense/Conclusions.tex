@@ -178,13 +178,16 @@
 \begin{frame}
 	\frametitle{That's all!}
 	
-	\begin{figure}
+	\begin{figure}[!h]
 		\centering
-		\begin{tikzpicture}
-			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
-			{
-				\includegraphics[width=0.8\linewidth]{Figures/Question}
-			};
-		\end{tikzpicture}
+		\includemovie[inline=false,text=
+		{
+			\begin{tikzpicture}
+				\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=0.8\linewidth]{Figures/Questions}
+				};
+			\end{tikzpicture}
+		}]{}{}{../Videos/2-Nao/PTracking-RLSD.avi}
 	\end{figure}
 \end{frame}
