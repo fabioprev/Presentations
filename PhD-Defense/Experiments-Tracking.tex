@@ -1,5 +1,7 @@
 \section{Experimental Evaluation - Tracking}
 
+\logo{\includegraphics[height=1cm]{ThemeFigs/Sapienza}\vspace{200pt}}
+
 \begin{frame}
 	\frametitle{Evaluating a Tracking Algorithm}
 	
@@ -496,26 +498,51 @@
 	\framesubtitle{Multi-Sensor, Multi-Object}
 	
 	\begin{center}
-		\hspace{-6.85cm}
 		\begin{tikzpicture}
-
-			\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+			\node at (-2.54,0) [draw=black,ultra thick,inner sep=0pt]
 			{
-				\includegraphics[height=2.6cm]{Figures/RFID}
+				\includegraphics[height=2.3cm]{Figures/RFID}
+			};
+			\node at (2.54,0) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[height=2.3cm]{Figures/Environment}
 			};
 		\end{tikzpicture}
 	\end{center}
 	
-	\vspace{-2.5cm}
+	\scriptsize
 	
-	\begin{tabbing}
-		\hspace{5.55cm}
-		\textbf{Multi-Robot Surveillance through a Distributed Sensor Network} \\
-		\hspace{5.55cm}
-		A. Pennisi, F. Previtali, F. Ficarola, D. D. Bloisi, L. Iocchi, A. Vitaletti \\
-		\hspace{5.55cm}
-		\emph{Studies in Computational Intelligence, 2015} \\
-	\end{tabbing}
+	\vspace{-0.254cm}
+	
+	\begin{table}[!t]
+		\centering
+		\renewcommand{\arraystretch}{1.1}
+		\setlength{\tabcolsep}{0.09cm}
+		\begin{tabular}{c c c | c c c}
+			\cline{1-6}
+			\multicolumn{6}{c}{\textbf{PTracking}} \\ \hline
+			\textbf{Experiment} & \textbf{MOTA} & \textbf{MOTP} & \textbf{Experiment} & \textbf{MOTA} & \textbf{MOTP} \\
+			\hline
+			1 & 0.95 & 0.85 & 6 & 0.91 & 0.87 \\
+			2 & 0.97 & 0.90 & 7 & 0.95 & 0.89 \\
+			3 & 0.96 & 0.88 & 8 & 0.95 & 0.91 \\
+			4 & 0.92 & 0.91 & 9 & 0.97 & 0.93 \\
+			5 & 0.99 & 0.95 & 10 & 0.98 & 0.92 \\
+			\hline
+		\end{tabular}
+	\end{table}
+	
+	\tiny
+	
+	\textbf{Multi-Robot Surveillance through a Distributed Sensor Network} \\
+	A. Pennisi, F. Previtali, F. Ficarola, D. D. Bloisi, L. Iocchi, A. Vitaletti \\
+	\emph{Studies in Computational Intelligence, 2015} \\
+	
+	\vspace{0.1cm}
+	
+	\textbf{Distributed Sensor Network for Multi-Robot Surveillance} \\
+	A. Pennisi, F. Previtali, F. Ficarola, D. D. Bloisi, L. Iocchi, A. Vitaletti \\
+	\emph{Procedia Computer Science, 2014} \\
 \end{frame}
 
 %\begin{frame}

@@ -1,5 +1,21 @@
 \section{Activity Forecasting}
 
+\logo
+{
+	\begin{tikzpicture}
+		\hspace{0.09cm}
+		\node at (-1,0) [draw=white,ultra thick,inner sep=0pt]
+		{
+			\includegraphics[height=1cm]{ThemeFigs/Sapienza}
+		};
+		\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+		{
+			\includegraphics[height=1cm]{ThemeFigs/Edinburgh}
+		};
+	\end{tikzpicture}
+	\vspace{199.1pt}
+}
+
 \begin{frame}
 	\frametitle{Predicting Future Agent Motions}
 	
@@ -184,22 +200,26 @@
 	\frametitle{Predicting Future Agent Motions}
 	\framesubtitle{Policy Generation}
 	
-	\LARGE
+	\vspace{0.2cm}
 	
-	\vspace{1cm}
+	\begin{center}
+		\begin{tikzpicture}
+			\node at (-4.3,-1) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.5\linewidth]{Figures/Reward-3}
+			};
+			\node at (1,1) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.45\linewidth]{Figures/Reward-2}
+			};
+			\node at (-4,1.7) [draw=black,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.5\linewidth]{Figures/Reward-1}
+			};
+		\end{tikzpicture}
+	\end{center}
 	
-	The output of the optimisation process is a \textbf{set of $ \mathbf{G}^1 $ reward function models},
-	one for each goal, $ \mathbf{\mathcal{M}_s^G} $ per agent $ s $. \\
-	
-	\vspace{0.4cm}
-	
-	This allows us to generate a policy $ \pi_s^{G_i} $ for each goal $ G_i \in G $ per agent $ s $. \\
-	
-	\vspace{1.3cm}
-	
-	\normalsize
-	
-	1. Goals can be \emph{statically} chosen or \emph{generated} by analysing tracking data
+	Goals can be \emph{statically} chosen or \emph{generated} by analysing tracking data
 \end{frame}
 
 %\begin{frame}
@@ -222,18 +242,27 @@
 	\frametitle{Predicting Future Agent Motions}
 	\framesubtitle{Policy Comparison}
 	
-	\LARGE
+	\Large
 	
-	\vspace{0.1cm}
+	\vspace{0.3cm}
 	
-	We get the best fitting policy by \textbf{comparing} the target trajectory against a
-	set of trajectories drawn from potential optimal policies. \\
+	Best fitting policy by \textbf{comparing} the target trajectory against trajectories drawn from
+	potential optimal policies.
 	
-	\vspace{0.4cm}
+	\vspace{-0.3cm}
 	
-	We use a combination of \emph{Fr\'echet distance} and \emph{cosine similarity}, to
-	allow for the possibility that the target trajectory is merely a fragment of the
-	overall optimal policy. \\
+	\begin{center}
+		\begin{tikzpicture}
+			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.72\linewidth]{Figures/Frechet}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{-0.5cm}
+	
+	The \textbf{Fr\'echet distance} between curves is the minimum leash length that permits the walk.\\
 \end{frame}
 
 \begin{frame}
