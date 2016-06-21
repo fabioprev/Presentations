@@ -51,23 +51,23 @@
 	
 	\Large
 	
-	\vspace{0.1cm}
-	
-	\begin{table}[!t]
-		\centering
-		\renewcommand{\arraystretch}{1.15}
-		\begin{tabular}{ c | c | c | }
-			\cline{2-3}
-			& \textbf{Global} & \textbf{Recursive} \\ \hline
-			
-			\multicolumn{1}{|c|}{\textbf{Accuracy}} & $ MOTA > 65\% $ & $ MOTA > 65\% $ \\ \hline
-			\multicolumn{1}{|c|}{\textbf{Precision}} & $ \mathbf{MOTP > 70\%} $ & $ MOTP > 60\% $ \\
-			\hline
-			\multicolumn{1}{|c|}{\textbf{Robustness}} & $ \mathbf{IDS < 3\%} $ & $ IDS < 7\% $ \\
-			\hline
-			\multicolumn{1}{|c|}{\textbf{Time per Frame}} & $ \sim 200/650 $ $ ms $ &
-			$ \mathbf{\boldsymbol{\sim} 30/70} $ \textbf{ms} \\ \hline
-			\multicolumn{1}{|c|}{\textbf{Real-time}} & no & \textbf{yes}/no \\ \hline
-		\end{tabular}
-	\end{table}
+	\begin{center}
+		\begin{table}[!t]
+			\renewcommand{\arraystretch}{1.2}
+			\setlength{\tabcolsep}{0.09cm}
+			\begin{tabular}{ c | c | c | }
+				\cline{2-3}
+				& \textbf{Global} & \textbf{Recursive} \\ \hline			
+				\multicolumn{1}{|c|}{\textbf{Accuracy}} & $ > 65\% $ & $ > 65\% $ \\ \hline
+				\multicolumn{1}{|c|}{\textbf{Precision}} & $ \mathbf{> 70\%} $ & $ > 60\% $ \\
+				\hline
+				\multicolumn{1}{|c|}{\textbf{Robustness}} & $ \mathbf{IDS < 3\%}, \mathbf{FP < 2\%} $ &
+				$ IDS < 7\%, FP < 5\% $ \\
+				\hline
+				\multicolumn{1}{|c|}{\textbf{Frame Time}} & $ \sim 200/650 $ $ ms $ &
+				$ \mathbf{\boldsymbol{\sim} 30/70} $ \textbf{ms} \\ \hline
+				\multicolumn{1}{|c|}{\textbf{Real-time}} & no & \textbf{yes}/no \\ \hline
+			\end{tabular}
+		\end{table}
+	\end{center}
 \end{frame}

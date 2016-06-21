@@ -53,6 +53,21 @@
 
 \begin{frame}
 	\frametitle{PTracking}
+	\framesubtitle{Architecture}
+	
+	\begin{figure}[!h]
+		\centering
+		\begin{tikzpicture}
+			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=\linewidth]{Figures/Scheme}
+			};
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking}
 	\framesubtitle{Pseudo-code}
 	
 	\begin{columns}[T]
@@ -121,6 +136,16 @@
 					\includegraphics[width=3.3cm]{Figures/Mamot-2}
 				};
 			\end{tikzpicture}
+			
+			\column{.01\textwidth}
+			
+			\vspace{-0.4cm}
+			
+			\begin{tabbing}
+				\hspace{-0.9cm}
+				
+				\begin{turn}{-90}\textcolor{darkgreen}{\lsstyle \textbf{LOCAL ESTIMATION LAYER}}\end{turn}
+			\end{tabbing}
 		}
 		
 		\only<2->
@@ -176,13 +201,23 @@
 			\begin{tikzpicture}
 				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
 				{
-					\includegraphics[width=3.3cm]{Figures/Mamot-1}
+					\includegraphics[width=3.3cm]{Figures/Mamot-3}
 				};
 				\node at (0,-3.5) [draw=black,ultra thick,inner sep=0pt]
 				{
-					\includegraphics[width=3.3cm]{Figures/Mamot-3}
+					\includegraphics[width=3.3cm]{Figures/Mamot-4}
 				};
 			\end{tikzpicture}
+			
+			\column{.01\textwidth}
+			
+			\vspace{-0.57cm}
+			
+			\begin{tabbing}
+				\hspace{-0.9cm}
+				
+				\begin{turn}{-90}\textcolor{lightred}{\lsstyle \textbf{GLOBAL ESTIMATION LAYER}}\end{turn}
+			\end{tabbing}
 		}
 	\end{columns}
 \end{frame}
