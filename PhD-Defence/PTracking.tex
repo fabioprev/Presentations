@@ -1,0 +1,247 @@
+\section{PTracking Algorithm}
+
+\begin{frame}
+	\frametitle{PTracking}
+	\framesubtitle{General Schema}
+	
+	\vspace{-0.27cm}
+	
+	\begin{columns}[T]
+		\column{.5\textwidth}
+		
+		\vspace{0.8cm}
+		
+		\begin{itemize}
+			\item \textbf{Input:} set of positions of the objects provided by a multi object detector
+				  system (e.g., \cite{Bloisi12})
+			
+			\vspace{1.6cm}
+			
+			\item \textbf{Output:} set of estimated trajectories of the moving objects over time
+		\end{itemize}
+		
+		\column{.5\textwidth}
+		\centering
+		
+		\vspace{-0.45cm}
+		
+		\begin{figure}[!h]
+			\centering
+			\includemovie[inline=false,text=
+			{
+				\begin{tikzpicture}
+					\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+					{
+						\includegraphics[width=6cm]{Figures/Detection}
+					};
+					\node at (0,-3.35) [draw=black,ultra thick,inner sep=0pt]
+					{
+						\includegraphics[width=6cm]{Figures/Tracking}
+					};
+				\end{tikzpicture}
+			}]{}{}{../Videos/4-People/PTracking-Edinburgh.avi}
+		\end{figure}
+	\end{columns}
+	
+	\vspace{0.3cm}
+	
+	\tiny
+	
+	\cite{Bloisi12} D. D. Bloisi \emph{et al.},  ``Independent multimodal background subtraction'',
+	CompIMAGE, 2012
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking}
+	\framesubtitle{Architecture}
+	
+	\begin{figure}[!h]
+		\centering
+		\begin{tikzpicture}
+			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=\linewidth]{Figures/Scheme}
+			};
+		\end{tikzpicture}
+	\end{figure}
+\end{frame}
+
+\begin{frame}
+	\frametitle{PTracking}
+	\framesubtitle{Pseudo-code}
+	
+	\begin{columns}[T]
+		\column{.05\textwidth}
+		
+		\column{.55\textwidth}
+		
+		\only<1>
+		{
+			\begin{algorithm}[H]
+				\tiny
+				\KwIn{perceptions $ z_{s,t} $, local track numbers $ oi_{s,t-1} $, global track numbers $ OI_{s,t-1} $}
+				\BlankLine
+				\KwData{set of local particles $ \tilde{\xi}_{s,t} $, set of global particles $ \tilde{\xi}_{\mathcal{S'},t} $, sensor pose $ m_{s,t} $, local GMM set $ \mathcal{L} $, global GMM set $ \mathcal{G} $}
+				\BlankLine
+				\KwOut{global estimations $ x_{s,t} = (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) $}
+				\BlankLine
+				\Begin
+				{
+					\textcolor{darkgreen}{$ \tilde{\xi}_{s,t} \sim \pi_t (x_{s,t} | x_{s,t-1},z_{s,t},m_{s,t}) $}
+					\BlankLine
+					\textcolor{darkgreen}{Re-sample by using the SIR principle}\\
+					\BlankLine
+					\textcolor{darkgreen}{$ \mathcal{L} = KClusterize(\tilde{\xi}_{s,t}) $}
+					\BlankLine
+					\textcolor{darkgreen}{$ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) = DataAssociation(\mathcal{L}, oi_{s,t-1}) $}
+					\BlankLine
+					\textcolor{darkgreen}{Communicate belief $ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $ to other agents}
+				}
+				\BlankLine
+				\Begin
+				{
+					Collect $ \mathcal{L}_{S'} $ from a subset $ \mathcal{S'} \subseteq \mathcal{S} $ of
+					sensors within a $ \Delta t $
+					\BlankLine
+					$ \tilde{\xi}_{\mathcal{S'},t} \sim \tilde\pi = \sum_{s \in \mathcal{S'}} \boldsymbol\lambda_{s,t} \, \mathcal{N} (\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $
+					\BlankLine
+					Re-sample by using the SIR principle\\
+					\BlankLine
+					$ \mathcal{G} = KClusterize(\tilde\xi_{{\mathcal{S'},t}}) $
+					\BlankLine
+					$ (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) = DataAssociation(\mathcal{G},OI_{s,t-1}) $
+				}
+			\end{algorithm}
+			
+			\column{.01\textwidth}
+			
+			\Huge
+			\vspace{2.15cm}
+			
+			\begin{center}
+				\textcolor{blue}{$ \Rightarrow $}
+			\end{center}
+			
+			\column{.44\textwidth}
+			
+			\centering
+			
+			\begin{tikzpicture}
+				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-1}
+				};
+				\node at (0,-3.5) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-2}
+				};
+			\end{tikzpicture}
+			
+			\column{.01\textwidth}
+			
+			\vspace{-0.4cm}
+			
+			\begin{tabbing}
+				\hspace{-0.9cm}
+				
+				\begin{turn}{-90}\textcolor{darkgreen}{\lsstyle \textbf{LOCAL ESTIMATION LAYER}}\end{turn}
+			\end{tabbing}
+		}
+		
+		\only<2->
+		{
+			\begin{algorithm}[H]
+				\tiny
+				\KwIn{perceptions $ z_{s,t} $, local track numbers $ oi_{s,t-1} $, global track numbers $ OI_{s,t-1} $}
+				\BlankLine
+				\KwData{set of local particles $ \tilde{\xi}_{s,t} $, set of global particles $ \tilde{\xi}_{\mathcal{S'},t} $, sensor pose $ m_{s,t} $, local GMM set $ \mathcal{L} $, global GMM set $ \mathcal{G} $}
+				\BlankLine
+				\KwOut{global estimations $ x_{s,t} = (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) $}
+				\BlankLine
+				\Begin
+				{
+					$ \tilde{\xi}_{s,t} \sim \pi_t (x_{s,t} | x_{s,t-1},z_{s,t},m_{s,t}) $
+					\BlankLine
+					Re-sample by using the SIR principle\\
+					\BlankLine
+					$ \mathcal{L} = KClusterize(\tilde{\xi}_{s,t}) $
+					\BlankLine
+					$ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) = DataAssociation(\mathcal{L}, oi_{s,t-1}) $
+					\BlankLine
+					Communicate belief $ (\boldsymbol{oi}_{s,t},\boldsymbol\lambda_{s,t},\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $ to other agents
+				}
+				\BlankLine
+				\Begin
+				{
+					\textcolor{lightred}{Collect $ \mathcal{L}_{S'} $ from a subset $ \mathcal{S'} \subseteq \mathcal{S} $ of sensors within a $ \Delta t $}
+					\BlankLine
+					\textcolor{lightred}{$ \tilde{\xi}_{\mathcal{S'},t} \sim \tilde\pi = \sum_{s \in \mathcal{S'}} \boldsymbol\lambda_{s,t} \, \mathcal{N} (\boldsymbol\mu_{s,t},\boldsymbol\sigma_{s,t}) $}
+					\BlankLine
+					\textcolor{lightred}{Re-sample by using the SIR principle}\\
+					\BlankLine
+					\textcolor{lightred}{$ \mathcal{G} = KClusterize(\tilde\xi_{{\mathcal{S'},t}}) $}
+					\BlankLine
+					\textcolor{lightred}{$ (\boldsymbol{OI}_{s,t},\boldsymbol\Lambda_{s,t},\boldsymbol{M}_{s,t},\boldsymbol\Sigma_{s,t}) = DataAssociation(\mathcal{G},OI_{s,t-1}) $}
+				}
+			\end{algorithm}
+			
+			\column{.01\textwidth}
+			
+			\Huge
+			\vspace{2.15cm}
+			
+			\begin{center}
+				\textcolor{blue}{$ \Rightarrow $}
+			\end{center}
+			
+			\column{.44\textwidth}
+			
+			\centering
+			
+			\begin{tikzpicture}
+				\node at (0,0) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-3}
+				};
+				\node at (0,-3.5) [draw=black,ultra thick,inner sep=0pt]
+				{
+					\includegraphics[width=3.3cm]{Figures/Mamot-4}
+				};
+			\end{tikzpicture}
+			
+			\column{.01\textwidth}
+			
+			\vspace{-0.57cm}
+			
+			\begin{tabbing}
+				\hspace{-0.9cm}
+				
+				\begin{turn}{-90}\textcolor{lightred}{\lsstyle \textbf{GLOBAL ESTIMATION LAYER}}\end{turn}
+			\end{tabbing}
+		}
+	\end{columns}
+\end{frame}
+
+\begin{frame}
+	\frametitle{KClusterize}
+	\framesubtitle{Typical Clustering Scenario}
+	
+	\vspace{-0.1cm}
+	
+	\begin{center}
+		\begin{tikzpicture}[map/.style={draw=white,ultra thick,inner sep=0pt}]
+			\node at (0,-0.25) [map]
+			{
+				\includegraphics[width=0.3\linewidth]{Figures/PETS-2009-Frame-0722-zoomed}
+			};
+			\node at (5,1.5) [map]
+			{
+				\includegraphics[width=0.44\linewidth]{Figures/KClusterize}
+			};
+			\node at (5,-2) [map]
+			{
+				\includegraphics[width=0.44\linewidth]{Figures/ClusteringComparison}
+			};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
