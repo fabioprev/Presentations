@@ -37,11 +37,10 @@
 
 \begin{frame}
 	\frametitle{Related Work}
-	\framesubtitle{Magnetic Resonance Imaging}
 	
 	\Large
 	
-	\vspace{0.67cm}
+	\vspace{1cm}
 	
 	We \emph{discuss} methods that are mostly related with MRI.
 	
@@ -52,7 +51,7 @@
 	\textbf{Laplace-Beltrami eigenvalue} shape descriptors. Those descriptors are identified and their
 	performance is \textbf{analysed} using linear Support Vector Machine (SVM) classifier.
 	
-	\vspace{0.6cm}
+	\vspace{0.72cm}
 	
 	\tiny
 	
@@ -73,8 +72,8 @@
 			  feature-ranking approach as part of their feature extraction procedure, where the number
 			  of \textbf{top features} is determined using the Fisher criterion
 		\vspace{0.2cm}
-		\item Plocharski \emph{et al.} \cite{Plocharski16} design a technique to extract sulcal features
-			  by means of computing a sulcal medial surface for AD/CN classification
+		\item Plocharski \emph{et al.} \cite{Plocharski16} design a technique to extract \textbf{sulcal
+			  features} by means of computing a sulcal medial surface for AD/CN classification
 	\end{itemize}
 	
 	\vspace{0.7cm}
@@ -87,4 +86,36 @@
 	\cite{Plocharski16} M. Plocharski \emph{et al.}, ``Extraction of sulcal medial surface and
 	classification of Alzheimer's disease using sulcal features'',\\ \hspace{0.25cm} Journal on
 	Computer Methods and Programs in Biomedicine, 2016
+\end{frame}
+
+\begin{frame}
+	\frametitle{Related Work}
+	
+	\Large
+	
+	\vspace{0.6cm}
+	
+	Daliri \cite{Daliri12} proposes an automated method for diagnosing Alzheimer's disease from brain
+	MRI scans, where a \textbf{computer vision feature extractor} - called \emph{SIFT} \cite{Lowe04} -
+	is used to extract features for tackling the classification task.
+	
+	\begin{center}
+		\begin{tikzpicture}
+			\node at (0,0) [draw=red,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[scale=0.145]{Figures/SIFT}
+			};
+		\end{tikzpicture}
+	\end{center}
+	
+	\vspace{0.02cm}
+	
+	\tiny
+	
+	\cite{Daliri12} M. R. Daliri, ``Automated diagnosis of Alzheimer disease using the scale-invariant
+	feature transforms in magnetic resonance\\ \hspace{0.25cm} images'', Journal on Medical Systems,
+	2012
+	
+	\cite{Lowe04} D. G. Lowe \emph{et al.}, ``Distinctive image features from scale-invariant
+	keypoints'', Journal on Computer Vision, 2004
 \end{frame}
