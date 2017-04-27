@@ -1,0 +1,97 @@
+\documentclass{beamer}
+
+\mode<presentation>
+{
+	\usepackage{StyleFiles/Rome}
+	\setbeamercovered{transparent}
+}
+
+\mode<handout>
+{
+	\usepackage{pgfpages}
+	\pgfpagesuselayout{2 on 1}[a4paper,border shrink=5mm]
+	\nofiles
+}
+
+\usepackage[english]{babel}
+\usepackage[latin1]{inputenc}
+\usepackage{dsfont}
+\usepackage{setspace}
+\usepackage[algoruled]{algorithm2e}
+\usepackage{algorithmic,algorithm2e,float}
+
+\SetAlCapFnt{\scriptsize}
+\SetAlCapNameFnt{\scriptsize}
+
+\setbeamertemplate{itemize subitem}{\tiny\raise1.5pt\hbox{\donotcoloroutermaths$ \blacktriangleright $}}
+
+\title[Automatically classifying Alzheimer's disease by MRI analysis]{\huge Automatically classifying Alzheimer's disease by MRI analysis}
+
+\subtitle{}
+
+\author[Fabio Previtali]{\vspace{0.1cm} \\ \large Fabio Previtali \\ Paola Bertolazzi \\ Giovanni Felici \\ Emanuel Weitschek}
+
+\date[\today]{}
+
+\begin{document}
+
+\begin{frame}[plain]
+	\begin{center}
+		\LARGE
+		
+		\vspace{0.5cm}
+		
+		\textbf{A novel method and software for automatically classifying Alzheimer's disease
+		patients by magnetic resonance imaging analysis}
+		
+		\vspace{0.7cm}
+		
+		\large
+		
+		\emph{F. Previtali}, \emph{P. Bertolazzi}, \emph{G. Felici} and \emph{E. Weitschek}
+		
+		\vspace{1cm}
+		
+		\normalsize
+		
+		Workshop/Conference on $ \ldots $ \\
+		$ \langle $place$ \rangle $ \\
+		$ \langle $date$ \rangle $
+		
+		\vspace{0.6cm}
+		
+		\begin{tikzpicture}
+			\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.45\linewidth]{ThemeFigs/CNR}
+			};
+			\node at (6,0) [draw=white,ultra thick,inner sep=0pt]
+			{
+				\includegraphics[width=0.45\linewidth]{ThemeFigs/Uninettuno}
+			};
+		\end{tikzpicture}
+	\end{center}
+\end{frame}
+
+\logo
+{
+	\begin{tikzpicture}
+		\hspace{0.09cm}
+		\node at (-1.2,0) [draw=white,ultra thick,inner sep=0pt]
+		{
+			\includegraphics[height=1cm]{ThemeFigs/CNR-Logo}
+		};
+		\node at (0,0) [draw=white,ultra thick,inner sep=0pt]
+		{
+			\includegraphics[height=1cm]{ThemeFigs/Uninettuno-Logo}
+		};
+	\end{tikzpicture}
+	\vspace{199.1pt}
+}
+
+\input{Introduction}
+%\input{Method}
+%\input{Experiments}
+%\input{Conclusions}
+
+\end{document}
